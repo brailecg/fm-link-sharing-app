@@ -8,9 +8,9 @@ import Link from "next/link";
 const Signup = () => {
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
-      <div className="w-full h-full sm:w-[476px] sm:h-[573px]">
-        <AppLogo className=" mb-16" />
-        <div className="animate-in sm:bg-white">
+      <div className="w-full h-full flex flex-col sm:w-[476px] sm:h-[573px]">
+        <AppLogo className=" sm:self-center mb-16" />
+        <div className="animate-in sm:p-10 sm:bg-white">
           <div className=" mb-10">
             <h1 className=" text-2xl font-bold text-main-grey-dark leading-[150%]">
               Create account
@@ -20,16 +20,16 @@ const Signup = () => {
             </h3>
           </div>
           <form className=" mb-6">
-            <EmailInput label="Email Address" />
-            <PasswordInput label="Create Password" />
-            <PasswordInput label="Confirm Password" />
+            <EmailInput name="email" label="Email Address" />
+            <PasswordInput name="password" label="Create Password" />
+            <PasswordInput name="confirm_password" label="Confirm Password" />
             <SubmitButton
               className=" w-full h-12 bg-main-purple text-white rounded-md px-2"
               pendingText="Signing Up...">
               Create new account
             </SubmitButton>
           </form>
-          <div className="flex flex-col sm:flex-row items-center">
+          <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
             <p className=" text-main-grey">Already have an account?</p>
             <Link href="/login" className=" text-main-purple">
               Login

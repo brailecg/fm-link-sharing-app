@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      dropShadow: {
+        input: "0 0 2px #633CFF",
+      },
       fontSize: {
         "base-s": [
           "0.75rem",
@@ -15,10 +18,6 @@ module.exports = {
             leading: "0",
           },
         ],
-      },
-      backgroundImage: {
-        "email-icon": "url(/assets/email-icon.png)",
-        "lock-icon": "url(/assets/lock-icon.png)",
       },
       fontFamily: {
         "main-sans": ["var(--font-instrument-sans)"],
