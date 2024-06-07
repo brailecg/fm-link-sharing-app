@@ -2,8 +2,8 @@
 import React from "react";
 import AppLogo from "@/components/AppLogo";
 import Link from "next/link";
-import FormSignup from "../components/Form";
-const Signup = () => {
+import FormSignup from "../components/FormSignUp";
+const Signup = async () => {
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
       <div className="w-full h-full flex flex-col sm:w-[476px] sm:h-[573px]">
