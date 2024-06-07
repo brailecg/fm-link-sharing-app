@@ -30,7 +30,7 @@ const FormLogin = () => {
 
       <button
         type="submit"
-        className=" w-full h-12 bg-main-purple text-white rounded-md px-2">
+        className=" w-full h-12 bg-main-purple text-white rounded-md px-2 hover:bg-main-purple-hover">
         Login
       </button>
     </form>

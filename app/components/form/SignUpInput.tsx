@@ -31,11 +31,18 @@ const SignUpInput = ({
         <input
           {...register(
             name,
-            name === "confirm_password"
+            name !== "email"
               ? {
                   required: "Can't be emtpy",
-                  validate: (value) =>
-                    value === password || "Passwords do not match",
+                  validate: (value) => {
+                    if (name === "confirm_password" && value !== password) {
+                      return "Passwords do not match";
+                    }
+                  },
+                  minLength: {
+                    value: 8,
+                    message: "Password should be at least 8 characters",
+                  },
                 }
               : {
                   required: "Can't be emtpy",

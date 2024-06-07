@@ -36,9 +36,12 @@ const FormSignup = () => {
         errorMessage={errors["confirm_password"]?.message?.toString()}
         watch={watch}
       />
+      <p className="mb-6 text-main-grey text-xs">
+        Password must contain at least 8 characters
+      </p>
       <button
         type="submit"
-        className=" w-full h-12 bg-main-purple text-white rounded-md px-2">
+        className=" w-full h-12 bg-main-purple text-white rounded-md px-2 hover:bg-main-purple-hover">
         Create new account
       </button>
     </form>
