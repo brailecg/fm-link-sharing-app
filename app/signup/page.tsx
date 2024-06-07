@@ -1,10 +1,8 @@
+"use server";
 import React from "react";
-
-import { SubmitButton } from "../components/form/SubmitButton";
 import AppLogo from "@/components/AppLogo";
-import EmailInput from "../components/form/EmailInput";
-import PasswordInput from "../components/form/PasswordInput";
 import Link from "next/link";
+import FormSignup from "../components/Form";
 const Signup = () => {
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
@@ -19,16 +17,7 @@ const Signup = () => {
               Let's get your started sharing your links!
             </h3>
           </div>
-          <form className=" mb-6">
-            <EmailInput name="email" label="Email Address" />
-            <PasswordInput name="password" label="Create Password" />
-            <PasswordInput name="confirm_password" label="Confirm Password" />
-            <SubmitButton
-              className=" w-full h-12 bg-main-purple text-white rounded-md px-2"
-              pendingText="Signing Up...">
-              Create new account
-            </SubmitButton>
-          </form>
+          <FormSignup />
           <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
             <p className=" text-main-grey">Already have an account?</p>
             <Link href="/login" className=" text-main-purple">
