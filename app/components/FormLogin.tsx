@@ -2,6 +2,7 @@
 import React from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import LoginInput from "./form/LoginInput";
+import { login } from "@/utils/supabase/sb_auth";
 const FormLogin = () => {
   const {
     register,
@@ -10,9 +11,11 @@ const FormLogin = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log({ data });
+  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    login(data);
+  };
   return (
-    <form className=" mb-6" onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <LoginInput
         register={register}
         type="email"

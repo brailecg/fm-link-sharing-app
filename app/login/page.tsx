@@ -1,13 +1,9 @@
 "use server";
 import Link from "next/link";
-import { headers } from "next/headers";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import { SubmitButton } from "./submit-button";
+import Image from "next/image";
 
 import React from "react";
 import AppLogo from "@/components/AppLogo";
-import FormSignup from "../components/FormSignUp";
 import FormLogin from "../components/FormLogin";
 
 export default async function Login() {
@@ -67,11 +63,53 @@ export default async function Login() {
             </h3>
           </div>
           <FormLogin />
-          <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
+          <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2 mt-6">
             <p className=" text-main-grey">Don't have an account?</p>
             <Link href="/signup" className=" text-main-purple">
               Create Account
             </Link>
+          </div>
+          <div className="flex my-6 w-full items-center">
+            <div className="border flex-1"></div>
+            <div className="flex-none text-sm px-2 text-main-grey italic">
+              or
+            </div>
+            <div className="border flex-1"></div>
+          </div>
+          <div className=" space-y-2">
+            <form>
+              <button className="flex items-center justify-center gap-3 border rounded-md p-2 bg-white w-full h-12">
+                <Image
+                  width={24}
+                  height={24}
+                  alt="Google Icon"
+                  src={
+                    "https://fdksslojrpadbebswbsg.supabase.co/storage/v1/object/public/icons/icon-google.png?t=2024-05-28T02%3A26%3A18.354Z"
+                  }
+                />
+                <span className=" text-black/50 font-semibold">
+                  Continue With Google
+                </span>
+              </button>
+            </form>
+            <form>
+              <button className="flex items-center justify-center gap-3 border rounded-md p-2 bg-white w-full h-12">
+                <Image
+                  width={24}
+                  height={24}
+                  alt="Supabase Icon"
+                  src={
+                    "https://fdksslojrpadbebswbsg.supabase.co/storage/v1/object/public/icons/supabase-logo-icon.png?t=2024-06-01T03%3A18%3A03.958Z"
+                  }
+                />
+                <span className=" text-black/50 font-semibold">
+                  Continue Anonymously
+                </span>
+              </button>
+              <div className=" italic text-xs mt-1 text-main-grey-hover text-center">
+                Anonynous users will be deleted at the end of each day.
+              </div>
+            </form>
           </div>
         </div>
       </div>

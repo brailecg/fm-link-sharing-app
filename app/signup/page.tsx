@@ -3,7 +3,11 @@ import React from "react";
 import AppLogo from "@/components/AppLogo";
 import Link from "next/link";
 import FormSignup from "../components/FormSignUp";
-const Signup = async () => {
+const Signup = async ({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) => {
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
       <div className="w-full h-full flex flex-col sm:w-[476px] sm:h-[573px]">
@@ -17,7 +21,8 @@ const Signup = async () => {
               Let's get your started sharing your links!
             </h3>
           </div>
-          <FormSignup />
+
+          <FormSignup message={searchParams?.message} />
           <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
             <p className=" text-main-grey">Already have an account?</p>
             <Link href="/login" className=" text-main-purple">
