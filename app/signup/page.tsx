@@ -23,7 +23,7 @@ const Signup = async ({
           </div>
 
           <FormSignup message={searchParams?.message} />
-          <div className="flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
+          <div className="mt-6 flex flex-col sm:flex-row items-center sm:justify-center sm:space-x-2">
             <p className=" text-main-grey">Already have an account?</p>
             <Link href="/login" className=" text-main-purple">
               Login

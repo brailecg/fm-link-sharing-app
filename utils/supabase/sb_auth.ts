@@ -51,3 +51,31 @@ export async function login(formData: FieldValues) {
 
   return redirect("/protected");
 }
+
+export async function continueWithGoogle() {
+  const supabase = createClient();
+
+  const { error, data } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: getURL() + "/auth/callback",
+    },
+  });
+
+  if (error) {
+    console.error("OAuth sign-in error:", error); // Log any errors
+  } else {
+    redirect(data.url);
+  }
+}
+
+export async function continueAnonymously() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.signInAnonymously();
+  if (error) {
+    console.error("Anonymous sign-in error:", error); // Log any errors
+  } else {
+    redirect("/protected");
+  }
+}
