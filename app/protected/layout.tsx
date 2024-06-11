@@ -6,9 +6,9 @@ export default async function Dashboard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen grid grid-rows-[auto_1fr] max-w-[1440px] sm:p-6 mx-auto w-full">
+    <div className="min-h-dvh grid grid-rows-[auto_1fr] max-w-[1440px] sm:p-6 mx-auto w-full">
       <Nav />
-      <div className="h-full">{children}</div>
+      {children}
     </div>
   );
 }
