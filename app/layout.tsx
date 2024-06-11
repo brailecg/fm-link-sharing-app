@@ -23,10 +23,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={instrument_sans.variable}>
-      <body className="bg-background text-foreground font-main-sans">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+      <body className="bg-main-grey-light min-h-dvh text-foreground font-main-sans">
+        <main className="flex flex-col items-center">{children}</main>
       </body>
     </html>
   );

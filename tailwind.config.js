@@ -36,6 +36,7 @@ module.exports = {
         "main-grey": "#737373",
         "main-grey-border": "#D9D9D9",
         "main-grey-light": "#FAFAFA",
+        "main-grey-outline": "#EEEEEE",
       },
     },
   },

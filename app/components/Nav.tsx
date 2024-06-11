@@ -10,7 +10,6 @@ import lsaLogo from "../../public/assets/lsa-logo.png";
 
 const Nav = () => {
   const pathName = usePathname();
-  console.log({ pathName });
 
   const linkColor =
     pathName === "/protected"
@@ -22,7 +21,7 @@ const Nav = () => {
       : ["fill-main-grey", "text-main-grey", "bg-white"];
 
   return (
-    <div className=" bg-white w-full place-self-end justify-self-stretch sm:place-self-start flex items-center justify-around  py-4 sm:rounded-lg">
+    <div className=" bg-white w-full h-[74px] flex items-center justify-around  py-4 sm:rounded-lg">
       <Link href={"/protected"}>
         <Image
           className="sm:hidden"
@@ -33,27 +32,29 @@ const Nav = () => {
         />
         <Image className="hidden sm:flex" alt="lsaLogo" src={lsaLogo} />
       </Link>
-      <Link
-        href={"/protected"}
-        className={`flex items-center justify-center px-7 py-3   rounded-md ${linkColor[2]} space-x-1 group`}>
-        <LinkIcon width={21} height={20} pathFill={linkColor[0]} />
-        <span
-          className={`hidden sm:flex font-semibold group-hover:text-main-purple ${linkColor[1]}`}>
-          Links
-        </span>
-      </Link>
-      <Link
-        href="/protected/profile"
-        className={`flex items-center justify-center px-7 py-3   rounded-md ${profileColor[2]} space-x-1 group`}>
-        <ProfileIcon width={21} height={20} pathFill={profileColor[0]} />
-        <span
-          className={`hidden sm:flex font-semibold group-hover:text-main-purple ${profileColor[1]}`}>
-          Profile
-        </span>
-      </Link>
+      <div className="flex">
+        <Link
+          href={"/protected"}
+          className={`flex items-center justify-center px-7 py-3   rounded-md ${linkColor[2]} space-x-1 group`}>
+          <LinkIcon width={21} height={20} pathFill={linkColor[0]} />
+          <span
+            className={`hidden sm:flex font-semibold group-hover:text-main-purple ${linkColor[1]}`}>
+            Links
+          </span>
+        </Link>
+        <Link
+          href="/protected/profile"
+          className={`flex items-center justify-center px-7 py-3   rounded-md ${profileColor[2]} space-x-1 group`}>
+          <ProfileIcon width={21} height={20} pathFill={profileColor[0]} />
+          <span
+            className={`hidden sm:flex font-semibold group-hover:text-main-purple ${profileColor[1]}`}>
+            Profile Details
+          </span>
+        </Link>
+      </div>
       <Link
         href={"/protected/preview"}
-        className={`flex items-center justify-center px-4 py-3 border-2 border-main-purple rounded-lg group`}>
+        className={` sm:w-28 hover:bg-main-purple-light flex items-center justify-center px-4 py-3 border-2 border-main-purple rounded-lg group`}>
         <PreviewIcon width={21} height={20} />
         <span className={`hidden sm:flex font-semibold text-main-purple`}>
           Preview
