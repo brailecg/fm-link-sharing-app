@@ -4,6 +4,7 @@ import Image from "next/image";
 import phoneImage from "../../public/assets/preview-section.png";
 import getStarted from "../../public/assets/get-started.png";
 import Placeholder from "../components/phone/Placeholder";
+import FormLink from "../components/FormLink";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -50,35 +51,12 @@ export default async function ProtectedPage() {
                 with the world!
               </p>
             </div>
-            <button className="border border-main-purple rounded-lg w-full text-main-purple text-sm font-semibold h-11 hover:bg-main-purple-light">
-              + Add new link
-            </button>
           </div>
-
-          {/* <div className="link-list">
-            <div className=" p-5 bg-main-grey-light rounded-lg">
-              <div className="flex justify-between">
-                <p className=" font-bold text-main-grey">= Link #1</p>
-                <p className=" text-main-grey">Remove</p>
-              </div>
-
-            </div>
-          </div> */}
-          <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-10 p-4 sm:p-0">
-            <Image src={getStarted} alt="get-started" />
-            <h3 className="font-bold text-2xl text-main-grey-dark">
-              Let's get you started
-            </h3>
-            <p className=" text-main-grey max-w-[488px] text-center">
-              Use the “Add new link” button to get started. Once you have more
-              than one link, you can reorder and edit them. We're here to help
-              you share your profiles with everyone!
-            </p>
-          </div>
+          <FormLink />
         </div>
         <div className=" min-h-[95px] flex justify-end items-center p-6">
           <button
-            disabled
+            form="link-form"
             className=" w-full sm:w-24 h-11 bg-main-purple rounded-md text-white hover:bg-main-purple-hover disabled:bg-main-purple-hover">
             Save
           </button>

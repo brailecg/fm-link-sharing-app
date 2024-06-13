@@ -5,7 +5,7 @@ type LinkIconProps = {
   pathFill: string;
 };
 
-const SvgComponent = ({ width = 21, height = 20, pathFill }: LinkIconProps) => {
+const LinkIcon = ({ width = 21, height = 20, pathFill }: LinkIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,4 +16,4 @@ const SvgComponent = ({ width = 21, height = 20, pathFill }: LinkIconProps) => {
     </svg>
   );
 };
-export default SvgComponent;
+export default LinkIcon;
