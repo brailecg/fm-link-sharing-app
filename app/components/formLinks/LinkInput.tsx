@@ -1,25 +1,21 @@
 import React from "react";
-import Image from "next/image";
 import { LsaLinkSvg } from "./icons";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister } from "react-hook-form";
+import { z } from "zod";
+
+import { FormSchema } from "../FormLinks";
+
 type LoginInputProps = {
+  index: number;
   label?: string;
   name: string;
   type?: string;
-  register: UseFormRegister<
-    FieldValues & {
-      website: {
-        id: number;
-        name: string;
-        icon?: any;
-      };
-      linkString: string;
-    }
-  >;
+  register: UseFormRegister<z.infer<typeof FormSchema>>;
   errorMessage?: string;
 };
 
 const LinkInput = ({
+  index,
   name,
   label,
   type,
@@ -33,7 +29,7 @@ const LinkInput = ({
       </label>
       <div className="relative flex items-center mb-6">
         <input
-          {...register(name, {
+          {...register(`links.${index}.linkString`, {
             required: "Can't be emtpy",
           })}
           type={type}

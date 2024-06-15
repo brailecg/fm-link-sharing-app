@@ -1,26 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 
-import getStarted from "../../public/assets/get-started.png";
-import RepeaterLinks from "./formLinks/RepeaterLinks";
 import SelectPlatform from "./formLinks/SelectPlatform";
 import LinkInput from "./formLinks/LinkInput";
+import { LsaGhSvg } from "./formLinks/icons";
+import getStarted from "../../public/assets/get-started.png";
 
-const linkSchema = z.object({
+export const linkSchema = z.object({
   website: z.object({ id: z.number(), name: z.string(), icon: z.any() }),
   linkString: z.string().url(),
 });
 
-const FormSchema = z.object({
+export const FormSchema = z.object({
   links: linkSchema.array(),
-  // id: z.number(),
-  // website: z.object({ id: z.number(), name: z.string(), icon: z.any() }),
-  // linkString: z.string().url(),
 });
 
 const FormLinks = () => {
@@ -40,13 +37,13 @@ const FormLinks = () => {
 
   const handleSetLinks = () => {
     append({
-      website: { id: fields.length + 1, name: "" },
+      website: { id: 1, name: "Github", icon: <LsaGhSvg /> },
       linkString: "",
     });
   };
 
-  const removeLink = (id: string) => {
-    console.log("remove");
+  const removeLink = (id: number) => {
+    remove(id);
   };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -78,60 +75,32 @@ const FormLinks = () => {
                   </p>
                   <button
                     type="button"
-                    onClick={() => removeLink(field?.id)}
+                    onClick={() => removeLink(index)}
                     className=" text-main-grey">
                     Remove
                   </button>
                 </div>
                 <div>
-                  <SelectPlatform control={control} />
+                  <SelectPlatform control={control} index={index} />
                 </div>
                 <div>
                   <LinkInput
-                    name="linkString"
+                    index={index}
+                    name={`links.${index}.linkString`}
                     label="Link"
                     type="string"
                     register={register}
-                    errorMessage={errors["linkString"]?.message?.toString()}
+                    errorMessage={errors?.links?.[
+                      index
+                    ]?.linkString?.message?.toString()}
                   />
                 </div>
               </div>
             );
           })}
-        {/* {links.map((link, index) => {
-            return (
-              <div
-                key={link?.id}
-                className=" bg-main-grey-light p-4 rounded-lg space-y-3 mb-4">
-                <div className="flex justify-between">
-                  <p className=" text-main-grey font-semibold">
-                    = Link {index + 1}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => removeLink(link?.id)}
-                    className=" text-main-grey">
-                    Remove
-                  </button>
-                </div>
-                <div>
-                  <SelectPlatform control={control} />
-                </div>
-                <div>
-                  <LinkInput
-                    name="linkString"
-                    label="Link"
-                    type="string"
-                    register={register}
-                    errorMessage={errors["linkString"]?.message?.toString()}
-                  />
-                </div>
-              </div>
-            );
-          })} */}
       </form>
 
-      {/*   
+      {fields.length === 0 && (
         <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-10 p-4 sm:p-0">
           <Image src={getStarted} alt="get-started" />
           <h3 className="font-bold text-2xl text-main-grey-dark">
@@ -142,7 +111,8 @@ const FormLinks = () => {
             than one link, you can reorder and edit them. We're here to help you
             share your profiles with everyone!
           </p>
-        </div> */}
+        </div>
+      )}
     </div>
   );
 };

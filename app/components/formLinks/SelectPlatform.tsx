@@ -12,54 +12,40 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./icons";
+import { FormSchema } from "../FormLinks";
 
 type PlatformListType = {
-  links: {
-    id: number;
-    name: string;
-    icon: ReactNode;
-  }[];
-};
+  id: number;
+  name: string;
+  icon: ReactNode;
+}[];
 
-const platformList: PlatformListType = {
-  links: [
-    { id: 1, name: "Github", icon: <LsaGhSvg /> },
-    { id: 2, name: "Youtube", icon: <LsaYtSvg /> },
-    { id: 3, name: "LinkedIn", icon: <LsaLiSvg /> },
-    { id: 4, name: "Facebook", icon: <LsaFbSvg /> },
-  ],
-};
+const platformList: PlatformListType = [
+  { id: 1, name: "Github", icon: <LsaGhSvg /> },
+  { id: 2, name: "Youtube", icon: <LsaYtSvg /> },
+  { id: 3, name: "LinkedIn", icon: <LsaLiSvg /> },
+  { id: 4, name: "Facebook", icon: <LsaFbSvg /> },
+];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Define the type that matches your schema
-const linkSchema = z.object({
-  website: z.object({ id: z.number(), name: z.string(), icon: z.any() }),
-  linkString: z.string().url(),
-});
-
-const FormSchema = z.object({
-  links: linkSchema.array(),
-  // id: z.number(),
-  // website: z.object({ id: z.number(), name: z.string(), icon: z.any() }),
-  // linkString: z.string().url(),
-});
-
 type FormValues = z.infer<typeof FormSchema>;
 
 export default function SelectPlatform({
   control,
+  index,
 }: {
   control: Control<FormValues>;
+  index: number;
 }) {
   return (
     <Controller
-      name="links"
+      name={`links.${index}.website`}
       control={control}
       rules={{ required: true }}
-      defaultValue={platformList.links[0]}
+      defaultValue={platformList[0]}
       render={({ field: { value, onChange } }) => (
         <Listbox value={value} onChange={onChange}>
           {({ open }) => {
@@ -86,7 +72,7 @@ export default function SelectPlatform({
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0">
                     <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {platformList.links.map((platform) => (
+                      {platformList?.map((platform) => (
                         <ListboxOption
                           key={platform.id}
                           className={({ focus }) =>
@@ -105,7 +91,7 @@ export default function SelectPlatform({
                                   "flex items-center space-x-2 truncate"
                                 )}>
                                 {platform?.icon}
-                                <span> {platform.name}</span>
+                                <span> {platform?.name}</span>
                               </span>
                             </>
                           )}
