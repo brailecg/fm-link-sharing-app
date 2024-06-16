@@ -61,10 +61,9 @@ const FormLinks = () => {
         className="border border-main-purple rounded-lg w-full text-main-purple text-sm font-semibold h-11 hover:bg-main-purple-light">
         + Add new link
       </button>
-
-      <form className="" id="link-form" onSubmit={handleSubmit(onSubmit)}>
-        {fields.length > 0 &&
-          fields.map((field, index) => {
+      {fields.length > 0 && (
+        <form className="" id="link-form" onSubmit={handleSubmit(onSubmit)}>
+          {fields.map((field, index) => {
             return (
               <div
                 key={field?.id}
@@ -98,8 +97,8 @@ const FormLinks = () => {
               </div>
             );
           })}
-      </form>
-
+        </form>
+      )}
       {fields.length === 0 && (
         <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-10 p-4 sm:p-0">
           <Image src={getStarted} alt="get-started" />

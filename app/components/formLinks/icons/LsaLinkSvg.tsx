@@ -1,7 +1,7 @@
 import React from "react";
 type LinkIconProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   pathFill: string;
 };
 
