@@ -1,5 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 import { z } from "zod";
 import {
@@ -9,6 +10,9 @@ import {
   LsaYtSvg,
 } from "../../components/formLinks/icons";
 import PhoneLinks from "../../components/PhoneLinks";
+import LsaFileSvg from "@/app/components/formLinks/icons/LsaFileSvg";
+import ProfileInput from "@/app/components/formProfiles/ProfileInput";
+import ProfileImage from "@/app/components/formProfiles/ProfileImage";
 
 const userProfileSampleType = z.object({
   id: z.string().uuid(),
@@ -94,11 +98,35 @@ export default async function Profile() {
               </p>
             </div>
           </div>
+          <div>
+            <form
+              id="profile-link"
+              className="space-y-4 grid grid-rows-[auto_1fr]">
+              <ProfileImage />
+              <div className=" bg-main-grey-light rounded-lg p-5 space-y-4">
+                <ProfileInput
+                  label="First name*"
+                  htmlFor="firstName"
+                  placeholder="e.g. John"
+                />
+                <ProfileInput
+                  label="Last name*"
+                  htmlFor="lastName"
+                  placeholder="e.g. Appleseed"
+                />
+                <ProfileInput
+                  label="Email"
+                  htmlFor="email"
+                  placeholder="e.g. email@example.com"
+                />
+              </div>
+            </form>
+          </div>
         </div>
 
         <div className=" min-h-[95px] flex justify-end items-center p-6 border-t">
           <button
-            form="link-form"
+            form="profile-form"
             className=" w-full sm:w-24 h-11 bg-main-purple rounded-md text-white hover:bg-main-purple-hover disabled:bg-main-purple-hover">
             Save
           </button>

@@ -61,6 +61,7 @@ const PhoneLinks = ({
             const bgColor = `${link?.color}`;
             return (
               <Link
+                key={link?.id}
                 style={{ backgroundColor: bgColor }}
                 className={`w-[237px] h-[44px] rounded-md text-white flex justify-between items-center px-4`}
                 href={link.url}>
@@ -97,8 +98,8 @@ const PhoneLinks = ({
             getLinkPlacholderCount(userProfileSample?.links?.length).length >
               0 &&
             getLinkPlacholderCount(userProfileSample?.links?.length)?.map(
-              (item) => {
-                return <Placeholder variant="linkHolder" />;
+              (item, index) => {
+                return <Placeholder key={index} variant="linkHolder" />;
               }
             )}
         </div>
