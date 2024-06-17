@@ -23,7 +23,11 @@ const ProfileImage = () => {
       </span>
       <label
         htmlFor="imageUrl"
-        className={`flex bg-main-purple-light rounded-lg w-48 h-48 justify-center items-center cursor-pointer`}>
+        className={`flex ${
+          imgUploadLocalUrl === ""
+            ? "bg-main-purple-light"
+            : " bg-main-grey-border"
+        } rounded-lg w-48 h-48 justify-center items-center cursor-pointer`}>
         {imgUploadLocalUrl === "" ? (
           <div
             className={`flex flex-col justify-center items-center space-y-3`}>
@@ -33,7 +37,7 @@ const ProfileImage = () => {
             </span>
           </div>
         ) : (
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex justify-center items-center w-48 h-48">
             <div className="z-10 absolute space-y-3 flex flex-col justify-center items-center">
               <LsaFileSvg pathFill="fill-white" />
               <span className=" text-white font-semibold">Change Image</span>
@@ -41,7 +45,7 @@ const ProfileImage = () => {
             <img
               src={imgUploadLocalUrl}
               alt="loadedImage"
-              className=" rounded-lg brightness-50"
+              className=" rounded-lg brightness-50 max-h-full max-w-full "
             />
           </div>
         )}
