@@ -15,7 +15,7 @@ const ProfileImage = () => {
       event.target.files.length > 0
     ) {
       setImgUploadLocalUrl(URL.createObjectURL(event.target.files[0]));
-      uploadImageAvatar(event.target.files[0]);
+      // uploadImageAvatar(event.target.files[0]);
     }
   };
   return (

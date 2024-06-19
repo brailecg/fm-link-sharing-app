@@ -19,7 +19,7 @@ const ProfileInput = ({
   errorMessage,
 }: ProfileInputType) => {
   return (
-    <div className="grid sm:grid-cols-3">
+    <div className="grid sm:grid-cols-3 space-y-1 sm:space-y-0">
       <label
         htmlFor={htmlFor}
         className=" my-auto text-main-grey text-xs sm:text-base">
@@ -32,7 +32,7 @@ const ProfileInput = ({
           })}
           id={htmlFor}
           placeholder={placeholder}
-          className={`w-full focus:outline-none focus:border-main-purple  focus:drop-shadow-input rounded-md pl-8 pr-4 py-2 text-sm h-12  ${
+          className={`w-full focus:outline-none focus:border-main-purple  focus:drop-shadow-input rounded-md px-4 py-2 text-sm h-12  ${
             errorMessage
               ? " border border-red-500 focus:border-red-500 focus:drop-shadow-none"
               : "border "
