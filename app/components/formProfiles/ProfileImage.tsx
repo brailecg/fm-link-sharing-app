@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 import LsaFileSvg from "../formLinks/icons/LsaFileSvg";
+import { uploadImageAvatar } from "@/utils/supabase/actions";
 
 const ProfileImage = () => {
   const [imgUploadLocalUrl, setImgUploadLocalUrl] = useState("");
@@ -14,6 +15,7 @@ const ProfileImage = () => {
       event.target.files.length > 0
     ) {
       setImgUploadLocalUrl(URL.createObjectURL(event.target.files[0]));
+      uploadImageAvatar(event.target.files[0]);
     }
   };
   return (
@@ -51,6 +53,7 @@ const ProfileImage = () => {
         )}
       </label>
       <input
+        name="imageUrl"
         id="imageUrl"
         type="file"
         className="hidden"

@@ -1,8 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   LsaFbSvg,
   LsaGhSvg,
@@ -10,9 +11,8 @@ import {
   LsaYtSvg,
 } from "../../components/formLinks/icons";
 import PhoneLinks from "../../components/PhoneLinks";
-import LsaFileSvg from "@/app/components/formLinks/icons/LsaFileSvg";
-import ProfileInput from "@/app/components/formProfiles/ProfileInput";
-import ProfileImage from "@/app/components/formProfiles/ProfileImage";
+
+import FormProfile from "@/app/components/FormProfile";
 
 const userProfileSampleType = z.object({
   id: z.string().uuid(),
@@ -36,7 +36,7 @@ const userProfileSample: UserProfileSampleType = {
   email: "brailegawen@gmail.com",
   name: "brailecg",
   profileName: "Braile Gawigawen",
-  imageUrl: "w",
+  imageUrl: "",
   links: [
     { id: 1, website: "Github", color: "#1A1A1A", url: "https://github.com" },
     {
@@ -46,7 +46,7 @@ const userProfileSample: UserProfileSampleType = {
       url: "https://youtube.com",
     },
     {
-      id: 5,
+      id: 4,
       website: "Youtube",
       color: "#EE3939",
       url: "https://youtube.com",
@@ -65,6 +65,8 @@ const linkIcons: LinkIconsType = {
   3: <LsaLiSvg fill="white" />,
   4: <LsaFbSvg fill="white" />,
 };
+
+const profileSchema = z.object({});
 
 export default async function Profile() {
   const supabase = createClient();
@@ -99,28 +101,7 @@ export default async function Profile() {
             </div>
           </div>
           <div>
-            <form
-              id="profile-link"
-              className="space-y-4 grid grid-rows-[auto_1fr]">
-              <ProfileImage />
-              <div className=" bg-main-grey-light rounded-lg p-5 space-y-4">
-                <ProfileInput
-                  label="First name*"
-                  htmlFor="firstName"
-                  placeholder="e.g. John"
-                />
-                <ProfileInput
-                  label="Last name*"
-                  htmlFor="lastName"
-                  placeholder="e.g. Appleseed"
-                />
-                <ProfileInput
-                  label="Email"
-                  htmlFor="email"
-                  placeholder="e.g. email@example.com"
-                />
-              </div>
-            </form>
+            <FormProfile />
           </div>
         </div>
 
