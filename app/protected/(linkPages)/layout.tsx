@@ -1,5 +1,5 @@
 "use server";
-import Nav from "../components/Nav";
+import Nav from "../../components/Nav";
 export default async function Dashboard({
   children,
 }: {

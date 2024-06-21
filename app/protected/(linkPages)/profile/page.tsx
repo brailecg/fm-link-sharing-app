@@ -2,15 +2,17 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import FormLinks from "../components/FormLinks";
 import {
   LsaFbSvg,
   LsaGhSvg,
   LsaLiSvg,
   LsaYtSvg,
-} from "../components/formLinks/icons";
-import PhoneLinks from "../components/PhoneLinks";
+} from "../../../components/formLinks/icons";
+import PhoneLinks from "../../../components/PhoneLinks";
+
+import FormProfile from "@/app/components/FormProfile";
 
 const userProfileSampleType = z.object({
   id: z.string().uuid(),
@@ -34,7 +36,7 @@ const userProfileSample: UserProfileSampleType = {
   email: "brailegawen@gmail.com",
   name: "brailecg",
   profileName: "Braile Gawigawen",
-  imageUrl: "w",
+  imageUrl: "",
   links: [
     { id: 1, website: "Github", color: "#1A1A1A", url: "https://github.com" },
     {
@@ -44,7 +46,7 @@ const userProfileSample: UserProfileSampleType = {
       url: "https://youtube.com",
     },
     {
-      id: 5,
+      id: 4,
       website: "Youtube",
       color: "#EE3939",
       url: "https://youtube.com",
@@ -64,7 +66,9 @@ const linkIcons: LinkIconsType = {
   4: <LsaFbSvg fill="white" />,
 };
 
-export default async function ProtectedPage() {
+const profileSchema = z.object({});
+
+export default async function Profile() {
   const supabase = createClient();
 
   const {
@@ -89,21 +93,21 @@ export default async function ProtectedPage() {
           <div className="space-y-10">
             <div className="space-y-3">
               <h1 className="font-bold text-2xl text-main-grey-dark">
-                Customize your links
+                Profile Details
               </h1>
               <p className=" text-main-grey">
-                Add/edit/remove links below and then share all your profiles
-                with the world!
+                Add your details to create a personal touch to your profile.
               </p>
             </div>
           </div>
-
-          <FormLinks />
+          <div>
+            <FormProfile />
+          </div>
         </div>
 
         <div className=" min-h-[95px] flex justify-end items-center p-6 border-t">
           <button
-            form="link-form"
+            form="profile-form"
             className=" w-full sm:w-24 h-11 bg-main-purple rounded-md text-white hover:bg-main-purple-hover disabled:bg-main-purple-hover">
             Save
           </button>

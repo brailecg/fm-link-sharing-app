@@ -34,7 +34,7 @@ const Nav = () => {
       </Link>
       <div className="flex">
         <Link
-          href={"/protected"}
+          href={"/protected/link"}
           className={`flex items-center justify-center px-7 py-3   rounded-md ${linkColor[2]} space-x-1 group`}>
           <LinkIcon width={21} height={20} pathFill={linkColor[0]} />
           <span
