@@ -67,7 +67,7 @@ const PhoneLinks = ({
             <Placeholder variant="emailHolder" />
           )}
         </div>
-        <div className=" grid place-items-center gap-5 grid-cols-1">
+        <div className=" grid place-items-center gap-5 grid-cols-1  overflow-y-auto custom-scroll h-80">
           {userProfileSample?.links?.map((link) => {
             const bgColor = `${link?.color}`;
             return (
