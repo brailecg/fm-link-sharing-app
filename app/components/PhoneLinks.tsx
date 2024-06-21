@@ -5,7 +5,11 @@ import phoneImage from "../../public/assets/preview-section.png";
 import Placeholder from "../components/phone/Placeholder";
 
 import { LsaLinkSvg } from "../components/formLinks/icons";
-import { UserProfileSampleType, LinkIconsType } from "../protected/page";
+
+import {
+  UserProfileSampleType,
+  LinkIconsType,
+} from "../protected/(linkPages)/link/page";
 
 const LINK_PLACEHOLDER_COUNT: number = 5;
 
@@ -20,13 +24,20 @@ const getLinkPlacholderCount = (userLinkCount: number): number[] => {
 const PhoneLinks = ({
   userProfileSample,
   linkIcons,
+  from,
 }: {
   userProfileSample: UserProfileSampleType;
   linkIcons: LinkIconsType;
+  from?: string;
 }) => {
   return (
-    <div className="relative w-[308px] h-[600px]">
-      <div className="absolute z-10 flex flex-col items-center justify-center space-y-10 w-full h-full">
+    <div
+      className={`relative w-[308px] h-[600px] border ${
+        from === "preview"
+          ? " bg-main-grey-light sm:rounded-3xl sm:shadow-lg"
+          : ""
+      }`}>
+      <div className="absolute z-10 flex flex-col items-center justify-center space-y-10 w-full h-full pt-6">
         <div className=" grid place-items-center gap-4 grid-cols-1">
           {userProfileSample?.imageUrl ? (
             <Image
@@ -104,7 +115,9 @@ const PhoneLinks = ({
             )}
         </div>
       </div>
+
       <Image
+        className={`${from === "preview" ? "hidden" : ""}`}
         src={phoneImage}
         alt="Picture of the author"
         sizes="308px"

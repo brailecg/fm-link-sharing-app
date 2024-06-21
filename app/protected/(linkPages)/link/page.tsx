@@ -29,7 +29,7 @@ const userProfileSampleType = z.object({
 });
 // Infer the type from the schema
 export type UserProfileSampleType = z.infer<typeof userProfileSampleType>;
-const userProfileSample: UserProfileSampleType = {
+export const userProfileSample: UserProfileSampleType = {
   id: "9cb8844d-8f53-4ce7-8e94-465d2becbfcb",
   email: "brailegawen@gmail.com",
   name: "brailecg",
@@ -57,7 +57,7 @@ export type LinkIconsType = {
   [key: number]: JSX.Element;
 };
 
-const linkIcons: LinkIconsType = {
+export const linkIcons: LinkIconsType = {
   1: <LsaGhSvg fill="white" />,
   2: <LsaYtSvg fill="white" />,
   3: <LsaLiSvg fill="white" />,

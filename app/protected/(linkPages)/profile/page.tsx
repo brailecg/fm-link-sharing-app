@@ -4,67 +4,9 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  LsaFbSvg,
-  LsaGhSvg,
-  LsaLiSvg,
-  LsaYtSvg,
-} from "../../../components/formLinks/icons";
 import PhoneLinks from "../../../components/PhoneLinks";
-
 import FormProfile from "@/app/components/FormProfile";
-
-const userProfileSampleType = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
-  name: z.string(),
-  profileName: z.string(),
-  imageUrl: z.string(),
-  links: z
-    .object({
-      id: z.number(),
-      website: z.string(),
-      color: z.string(),
-      url: z.string(),
-    })
-    .array(),
-});
-// Infer the type from the schema
-export type UserProfileSampleType = z.infer<typeof userProfileSampleType>;
-const userProfileSample: UserProfileSampleType = {
-  id: "9cb8844d-8f53-4ce7-8e94-465d2becbfcb",
-  email: "brailegawen@gmail.com",
-  name: "brailecg",
-  profileName: "Braile Gawigawen",
-  imageUrl: "",
-  links: [
-    { id: 1, website: "Github", color: "#1A1A1A", url: "https://github.com" },
-    {
-      id: 2,
-      website: "Youtube",
-      color: "#EE3939",
-      url: "https://youtube.com",
-    },
-    {
-      id: 4,
-      website: "Youtube",
-      color: "#EE3939",
-      url: "https://youtube.com",
-    },
-  ],
-};
-
-// Define the TypeScript type
-export type LinkIconsType = {
-  [key: number]: JSX.Element;
-};
-
-const linkIcons: LinkIconsType = {
-  1: <LsaGhSvg fill="white" />,
-  2: <LsaYtSvg fill="white" />,
-  3: <LsaLiSvg fill="white" />,
-  4: <LsaFbSvg fill="white" />,
-};
+import { userProfileSample, linkIcons } from "../link/page";
 
 const profileSchema = z.object({});
 
