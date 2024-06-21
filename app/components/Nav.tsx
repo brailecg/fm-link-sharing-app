@@ -12,7 +12,7 @@ const Nav = () => {
   const pathName = usePathname();
 
   const linkColor =
-    pathName === "/protected"
+    pathName === "/protected/link"
       ? ["fill-main-purple", "text-main-purple", "bg-main-purple-light"]
       : ["fill-main-grey", "text-main-grey", "bg-white"];
   const profileColor =

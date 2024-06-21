@@ -32,7 +32,7 @@ const PhoneLinks = ({
 }) => {
   return (
     <div
-      className={`relative w-[308px] h-[600px] border ${
+      className={`relative w-[308px] h-[600px] ${
         from === "preview"
           ? " bg-main-grey-light sm:rounded-3xl sm:shadow-lg"
           : ""
