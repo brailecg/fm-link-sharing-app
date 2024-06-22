@@ -22,7 +22,7 @@ const Nav = () => {
 
   return (
     <div className=" bg-white w-full h-[74px] flex items-center justify-around  py-4 sm:rounded-lg">
-      <Link href={"/protected"}>
+      <Link href={"/protected/link"}>
         <Image
           className="sm:hidden"
           alt="lsaIcon"
