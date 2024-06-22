@@ -1,5 +1,6 @@
 "use server";
-
+import { createClient } from "../../utils/supabase/server";
+import { redirect } from "next/navigation";
 import React from "react";
 import AppLogo from "@/components/AppLogo";
 import FormLogin from "../components/FormLogin";
@@ -9,6 +10,15 @@ export default async function Login({
 }: {
   searchParams: { message: string };
 }) {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    return redirect("/protected/link");
+  }
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
       <div className="w-full h-full flex flex-col sm:w-[476px] sm:h-[573px]">
