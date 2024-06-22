@@ -49,7 +49,7 @@ export async function login(formData: FieldValues) {
     return redirect("/login?message=Could not authenticate user");
   }
 
-  return redirect("/protected");
+  return redirect("/protected/link");
 }
 
 export async function continueWithGoogle() {
@@ -76,6 +76,6 @@ export async function continueAnonymously() {
   if (error) {
     console.error("Anonymous sign-in error:", error); // Log any errors
   } else {
-    redirect("/protected");
+    redirect("/protected/link");
   }
 }

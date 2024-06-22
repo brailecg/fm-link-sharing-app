@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import PhoneLinks from "../../../components/PhoneLinks";
 import FormProfile from "@/app/components/FormProfile";
 import { userProfileSample, linkIcons } from "../link/page";
+import SignoutButton from "./SignoutButton";
 
 const profileSchema = z.object({});
 
@@ -34,9 +35,12 @@ export default async function Profile() {
         <div className=" min-h-full p-6 space-y-6 sm:space-y-10 grid grid-rows-[auto_1fr]">
           <div className="space-y-10">
             <div className="space-y-3">
-              <h1 className="font-bold text-2xl text-main-grey-dark">
-                Profile Details
-              </h1>
+              <div className="flex justify-between">
+                <h1 className="font-bold text-2xl text-main-grey-dark">
+                  Profile Details
+                </h1>
+                <SignoutButton />
+              </div>
               <p className=" text-main-grey">
                 Add your details to create a personal touch to your profile.
               </p>
