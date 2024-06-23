@@ -32,7 +32,7 @@ export async function signUp(formData: FieldValues) {
     return redirect("/signup?message=" + errorMessage);
   }
 
-  return redirect("/signup?message=Check email to continue sign in process");
+  return redirect("/protected/link");
 }
 
 export async function login(formData: FieldValues) {
