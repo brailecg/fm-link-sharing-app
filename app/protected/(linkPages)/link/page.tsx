@@ -43,11 +43,7 @@ export default async function ProtectedPage() {
     <div className=" p-4 sm:p-0 grid grid-rows-1 grid-cols-5 lg:space-x-6 sm:mt-6 ">
       <div
         className={`col-span-2 hidden lg:flex justify-center items-center bg-white relative rounded-lg`}>
-        <PhoneLinks
-          profileDetails={profileDetails}
-          linkData={linkData}
-          linkIcons={linkIcons}
-        />
+        <PhoneLinks profileDetails={profileDetails} linkIcons={linkIcons} />
       </div>
       <div className=" grid grid-rows-[1fr_auto] col-span-5 lg:col-span-3 bg-white rounded-lg">
         <div className=" min-h-full p-6 space-y-6 sm:space-y-10 grid grid-rows-[auto_1fr]">

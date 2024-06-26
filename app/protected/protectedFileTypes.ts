@@ -30,7 +30,7 @@ export const platformList = z.object({
 export type PlatformListType = z.infer<typeof platformList>[];
 
 export const linkSchema = z.object({
-  link_id: z.string(),
+  link_id: z.string().optional(),
   website: platformList,
   linkString: z.string().url(),
 });

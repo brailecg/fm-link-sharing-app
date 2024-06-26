@@ -19,13 +19,7 @@ const getLinkPlacholderCount = (
   return [];
 };
 
-const PhoneLinksData = ({
-  linkData,
-  linkIcons,
-}: {
-  linkData: LinkDataType[] | undefined;
-  linkIcons: LinkIconsType;
-}) => {
+const PhoneLinksData = ({ linkIcons }: { linkIcons: LinkIconsType }) => {
   const linkDataArrayLocal = useLinkDataStore((state) => state.linkDataArray);
 
   return (

@@ -56,6 +56,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -79,6 +80,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
   };
 
   const removeLink = (id: number, fieldId: string) => {
+    console.log({ fieldId });
     if (fieldId !== "new")
       setLinksToDeleteArray(linksToDeleteArray.concat([fieldId]));
 
@@ -91,6 +93,17 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
       linksToDeleteArray
     );
 
+    const newFieldValues = linkDataRes.map((link) => {
+      return {
+        link_id: link?.link_id,
+        website: {
+          id: link?.website,
+          name: link?.website,
+        },
+        linkString: link?.url,
+      };
+    });
+    setValue("links", newFieldValues);
     updateDataLinks(linkDataRes);
   }
 
@@ -117,7 +130,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
                   </p>
                   <button
                     type="button"
-                    onClick={() => removeLink(index, field?.link_id)}
+                    onClick={() => removeLink(index, field?.link_id || "")}
                     className=" text-main-grey">
                     Remove
                   </button>

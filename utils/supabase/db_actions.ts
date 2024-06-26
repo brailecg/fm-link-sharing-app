@@ -86,13 +86,14 @@ export async function linkListActions(
       .from("link")
       .insert(linkToInsertArray)
       .select();
-
+    console.log({ res });
     if (!error) {
       res?.forEach((link) => {
         linkResponseArray.push({
           profile_id: link?.profile_id,
           website: link?.website,
           url: link?.url,
+          link_id: link?.link_id,
         });
       });
     }
@@ -103,13 +104,14 @@ export async function linkListActions(
       .from("link")
       .upsert(linkToUpsertArray)
       .select();
-
+    console.log({ resUpsert });
     if (!error) {
       resUpsert?.forEach((link) => {
         linkResponseArray.push({
           profile_id: link?.profile_id,
           website: link?.website,
           url: link?.url,
+          link_id: link?.link_id,
         });
       });
     }

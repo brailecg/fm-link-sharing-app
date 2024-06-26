@@ -2,7 +2,6 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import PhoneLinks from "../../../components/PhoneLinks";
 import FormProfile from "@/app/components/FormProfile";

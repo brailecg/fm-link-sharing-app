@@ -12,12 +12,10 @@ import PhoneLinksData from "./PhoneLinksData";
 
 const PhoneLinks = ({
   profileDetails,
-  linkData,
   linkIcons,
   from,
 }: {
   profileDetails: ProfileDetailsType;
-  linkData: LinkDataType[] | undefined;
   linkIcons: LinkIconsType;
   from?: string;
 }) => {
@@ -56,7 +54,7 @@ const PhoneLinks = ({
             <Placeholder variant="emailHolder" />
           )}
         </div>
-        <PhoneLinksData linkData={linkData} linkIcons={linkIcons} />
+        <PhoneLinksData linkIcons={linkIcons} />
       </div>
 
       <Image
