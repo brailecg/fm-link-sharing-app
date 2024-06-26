@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,26 +8,55 @@ import { z } from "zod";
 
 import SelectPlatform from "./formLinks/SelectPlatform";
 import LinkInput from "./formLinks/LinkInput";
-import { LsaGhSvg } from "./formLinks/icons";
+import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./formLinks/icons";
 import getStarted from "../../public/assets/get-started.png";
+import {
+  FormSchemaType,
+  LinkDataType,
+  FormSchema,
+  LinkTableType,
+} from "../protected/protectedFileTypes";
+import { linkListActions } from "@/utils/supabase/db_actions";
+import { useLinkDataStore } from "../store";
 
-export const linkSchema = z.object({
-  website: z.object({ id: z.number(), name: z.string(), icon: z.any() }),
-  linkString: z.string().url(),
-});
+export const linkIconObj: {
+  [key: string]: JSX.Element;
+} = {
+  github: <LsaGhSvg />,
+  youtube: <LsaYtSvg />,
+  linkedin: <LsaLiSvg />,
+  facebook: <LsaFbSvg />,
+};
 
-export const FormSchema = z.object({
-  links: linkSchema.array(),
-});
+const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
+  const updateDataLinks = useLinkDataStore(
+    (state) => state.updateLinkDataArray
+  );
 
-const FormLinks = () => {
+  const [linksToDeleteArray, setLinksToDeleteArray] = useState<string[]>([]);
+
+  const setDefaultValues =
+    linkData !== undefined
+      ? linkData?.map((link) => {
+          return {
+            link_id: link?.link_id,
+            website: {
+              id: link?.website,
+              name: link?.website,
+            },
+            linkString: link?.url,
+          };
+        })
+      : [];
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<z.infer<typeof FormSchema>>({
+  } = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
+    defaultValues: { links: setDefaultValues },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -37,18 +66,29 @@ const FormLinks = () => {
 
   const handleSetLinks = () => {
     append({
-      website: { id: 1, name: "Github", icon: <LsaGhSvg /> },
+      link_id: "new",
+      website: {
+        id: "github",
+        name: "Github",
+      },
       linkString: "",
     });
   };
 
-  const removeLink = (id: number) => {
+  const removeLink = (id: number, fieldId: string) => {
+    if (fieldId !== "new")
+      setLinksToDeleteArray(linksToDeleteArray.concat([fieldId]));
+
     remove(id);
   };
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ errors });
-    console.log({ data });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const linkData: LinkTableType[] = await linkListActions(
+      data,
+      linksToDeleteArray
+    );
+
+    updateDataLinks(linkData);
   }
 
   return (
@@ -61,9 +101,9 @@ const FormLinks = () => {
         className="border border-main-purple rounded-lg w-full text-main-purple text-sm font-semibold h-11 hover:bg-main-purple-light">
         + Add new link
       </button>
-      {fields.length > 0 && (
-        <form className="" id="link-form" onSubmit={handleSubmit(onSubmit)}>
-          {fields.map((field, index) => {
+      <form className="" id="link-form" onSubmit={handleSubmit(onSubmit)}>
+        {fields.length > 0 &&
+          fields?.map((field, index) => {
             return (
               <div
                 key={field?.id}
@@ -74,7 +114,7 @@ const FormLinks = () => {
                   </p>
                   <button
                     type="button"
-                    onClick={() => removeLink(index)}
+                    onClick={() => removeLink(index, field?.link_id)}
                     className=" text-main-grey">
                     Remove
                   </button>
@@ -97,8 +137,7 @@ const FormLinks = () => {
               </div>
             );
           })}
-        </form>
-      )}
+      </form>
       {fields.length === 0 && (
         <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-10 p-4 sm:p-0">
           <Image src={getStarted} alt="get-started" />

@@ -12,56 +12,18 @@ import {
 } from "../../../components/formLinks/icons";
 import PhoneLinks from "../../../components/PhoneLinks";
 
-const userProfileSampleType = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
-  name: z.string(),
-  profileName: z.string(),
-  imageUrl: z.string(),
-  links: z
-    .object({
-      id: z.number(),
-      website: z.string(),
-      color: z.string(),
-      url: z.string(),
-    })
-    .array(),
-});
-// Infer the type from the schema
-export type UserProfileSampleType = z.infer<typeof userProfileSampleType>;
-export const userProfileSample: UserProfileSampleType = {
-  id: "9cb8844d-8f53-4ce7-8e94-465d2becbfcb",
-  email: "brailegawen@gmail.com",
-  name: "brailecg",
-  profileName: "Braile Gawigawen",
-  imageUrl: "w",
-  links: [
-    { id: 1, website: "Github", color: "#1A1A1A", url: "https://github.com" },
-    {
-      id: 2,
-      website: "Youtube",
-      color: "#EE3939",
-      url: "https://youtube.com",
-    },
-    {
-      id: 5,
-      website: "Youtube",
-      color: "#EE3939",
-      url: "https://youtube.com",
-    },
-  ],
-};
-
-// Define the TypeScript type
-export type LinkIconsType = {
-  [key: number]: JSX.Element;
-};
+import { getAllLinks, getProfileDetails } from "@/utils/supabase/db_actions";
+import {
+  LinkDataType,
+  LinkIconsType,
+  ProfileDetailsType,
+} from "../../protectedFileTypes";
 
 export const linkIcons: LinkIconsType = {
-  1: <LsaGhSvg fill="white" />,
-  2: <LsaYtSvg fill="white" />,
-  3: <LsaLiSvg fill="white" />,
-  4: <LsaFbSvg fill="white" />,
+  github: [<LsaGhSvg fill="white" />, "#1A1A1A"],
+  youtube: [<LsaYtSvg fill="white" />, "#EE3939"],
+  linkedin: [<LsaLiSvg fill="white" />, "#EE3939"],
+  facebook: [<LsaFbSvg fill="white" />, "#EE3939"],
 };
 
 export default async function ProtectedPage() {
@@ -74,13 +36,16 @@ export default async function ProtectedPage() {
   if (!user) {
     return redirect("/login");
   }
+  const profileDetails: ProfileDetailsType = await getProfileDetails();
+  const linkData: LinkDataType[] | undefined = await getAllLinks();
 
   return (
     <div className=" p-4 sm:p-0 grid grid-rows-1 grid-cols-5 lg:space-x-6 sm:mt-6 ">
       <div
         className={`col-span-2 hidden lg:flex justify-center items-center bg-white relative rounded-lg`}>
         <PhoneLinks
-          userProfileSample={userProfileSample}
+          profileDetails={profileDetails}
+          linkData={linkData}
           linkIcons={linkIcons}
         />
       </div>
@@ -98,7 +63,7 @@ export default async function ProtectedPage() {
             </div>
           </div>
 
-          <FormLinks />
+          <FormLinks linkData={linkData} />
         </div>
 
         <div className=" min-h-[95px] flex justify-end items-center p-6 border-t">

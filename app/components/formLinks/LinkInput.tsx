@@ -2,8 +2,7 @@ import React from "react";
 import { LsaLinkSvg } from "./icons";
 import { UseFormRegister } from "react-hook-form";
 import { z } from "zod";
-
-import { FormSchema } from "../FormLinks";
+import { FormSchema } from "@/app/protected/protectedFileTypes";
 
 type LoginInputProps = {
   index: number;

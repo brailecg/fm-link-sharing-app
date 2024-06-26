@@ -12,20 +12,27 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./icons";
-import { FormSchema } from "../FormLinks";
 
-type PlatformListType = {
-  id: number;
-  name: string;
-  icon: ReactNode;
-}[];
+import {
+  FormSchema,
+  PlatformListType,
+} from "@/app/protected/protectedFileTypes";
 
 const platformList: PlatformListType = [
-  { id: 1, name: "Github", icon: <LsaGhSvg /> },
-  { id: 2, name: "Youtube", icon: <LsaYtSvg /> },
-  { id: 3, name: "LinkedIn", icon: <LsaLiSvg /> },
-  { id: 4, name: "Facebook", icon: <LsaFbSvg /> },
+  { id: "github", name: "Github" },
+  { id: "youtube", name: "Youtube" },
+  { id: "linkedin", name: "LinkedIn" },
+  { id: "facebook", name: "Facebook" },
 ];
+
+export const linkIconObj: {
+  [key: string]: JSX.Element;
+} = {
+  github: <LsaGhSvg />,
+  youtube: <LsaYtSvg />,
+  linkedin: <LsaLiSvg />,
+  facebook: <LsaFbSvg />,
+};
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -55,8 +62,8 @@ export default function SelectPlatform({
                 <div className="relative mt-1">
                   <ListboxButton className="relative w-full cursor-default rounded-lg bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 h-12">
                     <span className="truncate flex items-center space-x-2">
-                      {value?.icon}
-                      <span>{value?.name}</span>
+                      {linkIconObj[value?.id]}
+                      <span className=" capitalize">{value?.name}</span>
                     </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <ChevronDownIcon
@@ -90,8 +97,10 @@ export default function SelectPlatform({
                                   selected ? "font-semibold" : "font-normal",
                                   "flex items-center space-x-2 truncate"
                                 )}>
-                                {platform?.icon}
-                                <span> {platform?.name}</span>
+                                {linkIconObj[platform?.id]}
+                                <span className=" capitalize">
+                                  {platform?.name}
+                                </span>
                               </span>
                             </>
                           )}
