@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,6 @@ import {
   FormSchemaType,
   LinkDataType,
   FormSchema,
-  LinkTableType,
 } from "../protected/protectedFileTypes";
 import { linkListActions } from "@/utils/supabase/db_actions";
 import { useLinkDataStore } from "../store";
@@ -32,6 +31,10 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
   const updateDataLinks = useLinkDataStore(
     (state) => state.updateLinkDataArray
   );
+
+  useEffect(() => {
+    updateDataLinks(linkData);
+  }, []);
 
   const [linksToDeleteArray, setLinksToDeleteArray] = useState<string[]>([]);
 
@@ -83,12 +86,12 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
   };
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const linkData: LinkTableType[] = await linkListActions(
+    const linkDataRes: LinkDataType[] = await linkListActions(
       data,
       linksToDeleteArray
     );
 
-    updateDataLinks(linkData);
+    updateDataLinks(linkDataRes);
   }
 
   return (

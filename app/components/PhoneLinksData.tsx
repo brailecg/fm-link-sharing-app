@@ -28,12 +28,9 @@ const PhoneLinksData = ({
 }) => {
   const linkDataArrayLocal = useLinkDataStore((state) => state.linkDataArray);
 
-  const linkDataArrayToUse =
-    linkDataArrayLocal.length > 0 ? linkDataArrayLocal : linkData;
-
   return (
     <div className=" grid place-items-center grid-cols-1  overflow-y-auto custom-scroll h-80">
-      {linkDataArrayToUse?.map((link) => {
+      {linkDataArrayLocal?.map((link) => {
         const bgColor = `${linkIcons[link?.website][1]}`;
         return (
           <Link
@@ -70,10 +67,12 @@ const PhoneLinksData = ({
           </Link>
         );
       })}
-      {getLinkPlacholderCount(linkData?.length).length > 0 &&
-        getLinkPlacholderCount(linkData?.length)?.map((item, index) => {
-          return <Placeholder key={index} variant="linkHolder" />;
-        })}
+      {getLinkPlacholderCount(linkDataArrayLocal?.length).length > 0 &&
+        getLinkPlacholderCount(linkDataArrayLocal?.length)?.map(
+          (item, index) => {
+            return <Placeholder key={item} variant="linkHolder" />;
+          }
+        )}
     </div>
   );
 };

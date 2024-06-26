@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-import { LinkTableType } from "./protected/protectedFileTypes";
+import { LinkDataType } from "./protected/protectedFileTypes";
 
 type LinkDataState = {
-  linkDataArray: LinkTableType[];
+  linkDataArray: LinkDataType[] | undefined;
 };
 
 type LinkDataAction = {

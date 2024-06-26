@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { ReactNode } from "react";
 
 const profileDetails = z.object({
   email: z.string().email(),
@@ -11,10 +10,10 @@ const profileDetails = z.object({
 export type ProfileDetailsType = z.infer<typeof profileDetails> | undefined;
 
 const linkData = z.object({
-  link_id: z.string(),
+  link_id: z.string().optional(),
   website: z.string(),
-  link_color: z.string(),
   url: z.string(),
+  profile_id: z.string().optional(),
 });
 
 export type LinkDataType = z.infer<typeof linkData>;
@@ -41,12 +40,3 @@ export const FormSchema = z.object({
 });
 
 export type FormSchemaType = z.infer<typeof FormSchema>;
-
-// table data types
-// 1. link table
-export type LinkTableType = {
-  link_id?: string;
-  profile_id?: string;
-  website: string;
-  url: string;
-};

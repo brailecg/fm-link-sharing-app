@@ -4,9 +4,8 @@ import { PostgrestResponse } from "@supabase/supabase-js";
 import { createClient } from "./server";
 import {
   ProfileDetailsType,
-  LinkDataType,
   FormSchemaType,
-  LinkTableType,
+  LinkDataType,
 } from "@/app/protected/protectedFileTypes";
 
 // there are no filter by user since it's already being filtered in the table RLS
@@ -40,7 +39,7 @@ export async function getAllLinks(): Promise<LinkDataType[] | undefined> {
 export async function linkListActions(
   data: FormSchemaType,
   linksToDeleteArray: string[]
-): Promise<LinkTableType[]> {
+): Promise<LinkDataType[]> {
   const supabase = createClient();
 
   const {
@@ -58,8 +57,8 @@ export async function linkListActions(
   }
 
   // insert and/or upsert
-  let linkToInsertArray: LinkTableType[] = [];
-  let linkToUpsertArray: LinkTableType[] = [];
+  let linkToInsertArray: LinkDataType[] = [];
+  let linkToUpsertArray: LinkDataType[] = [];
 
   data?.links?.forEach((link) => {
     if (link?.link_id === "new") {
@@ -80,7 +79,7 @@ export async function linkListActions(
     }
   });
 
-  let linkResponseArray: LinkTableType[] = [];
+  let linkResponseArray: LinkDataType[] = [];
 
   if (linkToInsertArray.length > 0) {
     const { data: res, error } = await supabase
@@ -92,8 +91,8 @@ export async function linkListActions(
       res?.forEach((link) => {
         linkResponseArray.push({
           profile_id: link?.profile_id,
-          website: link?.website?.id,
-          url: link?.linkString,
+          website: link?.website,
+          url: link?.url,
         });
       });
     }
@@ -109,8 +108,8 @@ export async function linkListActions(
       resUpsert?.forEach((link) => {
         linkResponseArray.push({
           profile_id: link?.profile_id,
-          website: link?.website?.id,
-          url: link?.linkString,
+          website: link?.website,
+          url: link?.url,
         });
       });
     }
