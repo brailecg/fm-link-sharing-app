@@ -1,5 +1,4 @@
 import { createClient } from "./client";
-import path from "path";
 
 export async function uploadImageAvatar(avatarFile: File) {
   const supabase = createClient();

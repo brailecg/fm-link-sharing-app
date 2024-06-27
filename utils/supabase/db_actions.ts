@@ -10,14 +10,15 @@ import {
 } from "@/app/protected/protectedFileTypes";
 import { revalidatePath } from "next/cache";
 
-// there are no filter by user since it's already being filtered in the table RLS
-export async function getProfileDetails(): Promise<
-  ProfileDetailsType | undefined
-> {
+export async function getProfileDetails(
+  userId: string
+): Promise<ProfileDetailsType | undefined> {
   const supabase = createClient();
+
   const { data, error }: PostgrestResponse<ProfileDetailsType> = await supabase
     .from("profile")
-    .select(`profile_id, email, first_name, last_name, image_url, created_at`);
+    .select(`profile_id, email, first_name, last_name, image_url, created_at`)
+    .eq("profile_id", userId);
   if (error) {
     console.error("Error fetching profile details:", error);
     return undefined;
@@ -26,12 +27,15 @@ export async function getProfileDetails(): Promise<
   if (data && data.length > 0) return data[0];
 }
 
-export async function getAllLinks(): Promise<LinkDataType[] | undefined> {
+export async function getAllLinks(
+  userId: string
+): Promise<LinkDataType[] | undefined> {
   const supabase = createClient();
 
   const { data, error } = await supabase
     .from("link")
     .select(`link_id, url, website, link_color`)
+    .eq("profile_id", userId)
     .order("created_at", { ascending: true });
   if (error) {
     console.error("Error fetching link details:", error);

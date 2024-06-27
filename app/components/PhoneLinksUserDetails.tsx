@@ -55,7 +55,7 @@ const PhoneLinksUserDetails = ({
       ) : (
         <Placeholder variant="imageHolder" />
       )}
-      <div className="  text-center">
+      <div className=" flex flex-col items-center space-y-2  text-center">
         {userDetails?.first_name ? (
           <p className=" max-w-60 text-lg font-semibold text-main-grey-dark truncate">
             {userDetails?.first_name} {userDetails?.last_name}
