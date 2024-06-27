@@ -3,19 +3,29 @@ import Image from "next/image";
 import phoneImage from "../../public/assets/preview-section.png";
 
 import {
+  LinkDataType,
   LinkIconsType,
   ProfileDetailsType,
 } from "../protected/protectedFileTypes";
 import PhoneLinksData from "./PhoneLinksData";
 import PhoneLinksUserDetails from "./PhoneLinksUserDetails";
 
+import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./formLinks/icons";
+
+export const linkIcons: LinkIconsType = {
+  github: [<LsaGhSvg fill="white" />, "#1A1A1A"],
+  youtube: [<LsaYtSvg fill="white" />, "#EE3939"],
+  linkedin: [<LsaLiSvg fill="white" />, "#0a66c2"],
+  facebook: [<LsaFbSvg fill="white" />, "#0866ff"],
+};
+
 const PhoneLinks = ({
   profileDetails,
-  linkIcons,
+  linkData,
   from,
 }: {
   profileDetails: ProfileDetailsType;
-  linkIcons: LinkIconsType;
+  linkData: LinkDataType[] | undefined;
   from?: string;
 }) => {
   return (
@@ -25,9 +35,9 @@ const PhoneLinks = ({
           ? " bg-main-grey-light sm:rounded-3xl sm:shadow-lg"
           : ""
       }`}>
-      <div className="absolute z-10 flex flex-col items-center justify-center space-y-10 w-full h-full pt-6">
+      <div className="absolute z-10 flex flex-col items-center justify-center space-y-4 w-full h-full">
         <PhoneLinksUserDetails profileDetails={profileDetails} />
-        <PhoneLinksData linkIcons={linkIcons} />
+        <PhoneLinksData linkData={linkData} linkIcons={linkIcons} />
       </div>
 
       <Image

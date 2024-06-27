@@ -1,30 +1,12 @@
 import { createClient } from "../../../../utils/supabase/server";
 import { redirect } from "next/navigation";
 
-import { z } from "zod";
-
 import FormLinks from "../../../components/FormLinks";
-import {
-  LsaFbSvg,
-  LsaGhSvg,
-  LsaLiSvg,
-  LsaYtSvg,
-} from "../../../components/formLinks/icons";
+
 import PhoneLinks from "../../../components/PhoneLinks";
 
 import { getAllLinks, getProfileDetails } from "@/utils/supabase/db_actions";
-import {
-  LinkDataType,
-  LinkIconsType,
-  ProfileDetailsType,
-} from "../../protectedFileTypes";
-
-export const linkIcons: LinkIconsType = {
-  github: [<LsaGhSvg fill="white" />, "#1A1A1A"],
-  youtube: [<LsaYtSvg fill="white" />, "#EE3939"],
-  linkedin: [<LsaLiSvg fill="white" />, "#EE3939"],
-  facebook: [<LsaFbSvg fill="white" />, "#EE3939"],
-};
+import { LinkDataType, ProfileDetailsType } from "../../protectedFileTypes";
 
 export default async function ProtectedPage() {
   const supabase = createClient();
@@ -43,7 +25,11 @@ export default async function ProtectedPage() {
     <div className=" p-4 sm:p-0 grid grid-rows-1 grid-cols-5 lg:space-x-6 sm:mt-6 ">
       <div
         className={`col-span-2 hidden lg:flex justify-center items-center bg-white relative rounded-lg`}>
-        <PhoneLinks profileDetails={profileDetails} linkIcons={linkIcons} />
+        <PhoneLinks
+          from="links"
+          linkData={linkData}
+          profileDetails={profileDetails}
+        />
       </div>
       <div className=" grid grid-rows-[1fr_auto] col-span-5 lg:col-span-3 bg-white rounded-lg">
         <div className=" min-h-full p-6 space-y-6 sm:space-y-10 grid grid-rows-[auto_1fr]">

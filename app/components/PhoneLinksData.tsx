@@ -19,9 +19,14 @@ const getLinkPlacholderCount = (
   return [];
 };
 
-const PhoneLinksData = ({ linkIcons }: { linkIcons: LinkIconsType }) => {
-  const linkDataArrayLocal = useLinkDataStore((state) => state.linkDataArray);
-
+const PhoneLinksData = ({
+  linkData,
+  linkIcons,
+}: {
+  linkIcons: LinkIconsType;
+  linkData: LinkDataType[] | undefined;
+}) => {
+  const linkDataArrayLocal = linkData;
   return (
     <div className=" grid place-items-center grid-cols-1  overflow-y-auto custom-scroll h-80">
       {linkDataArrayLocal?.map((link) => {

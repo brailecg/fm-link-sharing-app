@@ -15,6 +15,7 @@ const linkData = z.object({
   website: z.string(),
   url: z.string(),
   profile_id: z.string().optional(),
+  created_at: z.string().optional(),
 });
 
 export type LinkDataType = z.infer<typeof linkData>;

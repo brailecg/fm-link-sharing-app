@@ -2,9 +2,24 @@ import React from "react";
 import Link from "next/link";
 
 import PhoneLinks from "@/app/components/PhoneLinks";
-import { userProfileSample, linkIcons } from "../(linkPages)/link/page";
 
-const page = () => {
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { LinkDataType, ProfileDetailsType } from "../protectedFileTypes";
+import { getProfileDetails, getAllLinks } from "@/utils/supabase/db_actions";
+
+const page = async () => {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+  const profileDetails: ProfileDetailsType = await getProfileDetails();
+  const linkData: LinkDataType[] | undefined = await getAllLinks();
   return (
     <div className="w-full relative">
       <div className=" sm:p-6 sm:bg-main-purple sm:h-[40vh] rounded-b-3xl -z-10">
@@ -22,8 +37,8 @@ const page = () => {
       </div>
       <div className="flex justify-center items-center sm:absolute sm:-translate-x-1/2 sm:translate-y-[0] left-1/2 top-1/2 z-10">
         <PhoneLinks
-          userProfileSample={userProfileSample}
-          linkIcons={linkIcons}
+          linkData={linkData}
+          profileDetails={profileDetails}
           from="preview"
         />
       </div>

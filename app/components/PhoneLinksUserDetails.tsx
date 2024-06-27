@@ -44,28 +44,33 @@ const PhoneLinksUserDetails = ({
   return (
     <div className=" grid place-items-center gap-4 grid-cols-1">
       {userDetails?.image_url ? (
-        <Image
-          src={userDetails?.image_url}
-          alt="User Image"
-          width={96}
-          height={96}
-          className="rounded-full"
-        />
+        <div className="rounded-full overflow-hidden">
+          <Image
+            src={userDetails?.image_url}
+            alt="User Image"
+            width={96}
+            height={96}
+          />
+        </div>
       ) : (
         <Placeholder variant="imageHolder" />
       )}
-      {userDetails?.first_name ? (
-        <p className=" text-lg font-semibold text-main-grey-dark">
-          {userDetails?.first_name} {userDetails?.last_name}
-        </p>
-      ) : (
-        <Placeholder variant="nameHolder" />
-      )}
-      {userDetails?.email ? (
-        <p className=" text-sm text-main-grey">{userDetails?.email}</p>
-      ) : (
-        <Placeholder variant="emailHolder" />
-      )}
+      <div className="  text-center">
+        {userDetails?.first_name ? (
+          <p className=" max-w-60 text-lg font-semibold text-main-grey-dark truncate">
+            {userDetails?.first_name} {userDetails?.last_name}
+          </p>
+        ) : (
+          <Placeholder variant="nameHolder" />
+        )}
+        {userDetails?.email ? (
+          <p className=" max-w-60 truncate text-sm text-main-grey">
+            {userDetails?.email}
+          </p>
+        ) : (
+          <Placeholder variant="emailHolder" />
+        )}
+      </div>
     </div>
   );
 };

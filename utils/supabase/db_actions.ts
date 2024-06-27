@@ -8,6 +8,7 @@ import {
   LinkDataType,
   ProfileSchemaType,
 } from "@/app/protected/protectedFileTypes";
+import { revalidatePath } from "next/cache";
 
 // there are no filter by user since it's already being filtered in the table RLS
 export async function getProfileDetails(): Promise<
@@ -16,7 +17,7 @@ export async function getProfileDetails(): Promise<
   const supabase = createClient();
   const { data, error }: PostgrestResponse<ProfileDetailsType> = await supabase
     .from("profile")
-    .select(`profile_id, email, first_name, last_name, image_url`);
+    .select(`profile_id, email, first_name, last_name, image_url, created_at`);
   if (error) {
     console.error("Error fetching profile details:", error);
     return undefined;
@@ -30,7 +31,8 @@ export async function getAllLinks(): Promise<LinkDataType[] | undefined> {
 
   const { data, error } = await supabase
     .from("link")
-    .select(`link_id, url, website, link_color`);
+    .select(`link_id, url, website, link_color`)
+    .order("created_at", { ascending: true });
   if (error) {
     console.error("Error fetching link details:", error);
     return undefined;
@@ -94,6 +96,7 @@ export async function linkListActions(
           website: link?.website,
           url: link?.url,
           link_id: link?.link_id,
+          created_at: link?.created_at,
         });
       });
     }
@@ -112,11 +115,12 @@ export async function linkListActions(
           website: link?.website,
           url: link?.url,
           link_id: link?.link_id,
+          created_at: link?.created_at,
         });
       });
     }
   }
-
+  revalidatePath("/protected/(linkPages)/link/page");
   return linkResponseArray;
 }
 

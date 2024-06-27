@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import PhoneLinks from "../../../components/PhoneLinks";
 import FormProfile from "@/app/components/FormProfile";
-import { linkIcons } from "../link/page";
+
 import SignoutButton from "./SignoutButton";
 import { LinkDataType, ProfileDetailsType } from "../../protectedFileTypes";
 import { getProfileDetails, getAllLinks } from "@/utils/supabase/db_actions";
@@ -23,12 +23,16 @@ export default async function Profile() {
     return redirect("/login");
   }
   const profileDetails: ProfileDetailsType = await getProfileDetails();
-
+  const linkData: LinkDataType[] | undefined = await getAllLinks();
   return (
     <div className=" p-4 sm:p-0 grid grid-rows-1 grid-cols-5 lg:space-x-6 sm:mt-6 ">
       <div
         className={`col-span-2 hidden lg:flex justify-center items-center bg-white relative rounded-lg`}>
-        <PhoneLinks profileDetails={profileDetails} linkIcons={linkIcons} />
+        <PhoneLinks
+          from="profiles"
+          linkData={linkData}
+          profileDetails={profileDetails}
+        />
       </div>
       <div className=" grid grid-rows-[1fr_auto] col-span-5 lg:col-span-3 bg-white rounded-lg">
         <div className=" min-h-full p-6 space-y-6 sm:space-y-10 grid grid-rows-[auto_1fr]">

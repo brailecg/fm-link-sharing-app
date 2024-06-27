@@ -75,7 +75,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
         id: "github",
         name: "Github",
       },
-      linkString: "",
+      linkString: "https://google.com",
     });
   };
 
@@ -100,10 +100,12 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
           name: link?.website,
         },
         linkString: link?.url,
+        created_at: link?.created_at,
       };
     });
+
     setValue("links", newFieldValues);
-    updateDataLinks(linkDataRes);
+    // updateDataLinks(linkDataRes);
   }
 
   return (
