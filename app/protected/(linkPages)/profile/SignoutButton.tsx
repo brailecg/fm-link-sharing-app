@@ -11,7 +11,7 @@ const SignoutButton = () => {
   const handleSignout = async () => {
     setIsSigningOut(true);
     const { error } = await supabase.auth.signOut();
-    console.log({ error });
+
     if (!error) {
       router.push("/login");
     }

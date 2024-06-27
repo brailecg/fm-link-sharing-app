@@ -80,7 +80,6 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
   };
 
   const removeLink = (id: number, fieldId: string) => {
-    console.log({ fieldId });
     if (fieldId !== "new")
       setLinksToDeleteArray(linksToDeleteArray.concat([fieldId]));
 

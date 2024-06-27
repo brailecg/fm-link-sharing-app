@@ -6,6 +6,7 @@ import {
   ProfileDetailsType,
   FormSchemaType,
   LinkDataType,
+  ProfileSchemaType,
 } from "@/app/protected/protectedFileTypes";
 
 // there are no filter by user since it's already being filtered in the table RLS
@@ -15,11 +16,12 @@ export async function getProfileDetails(): Promise<
   const supabase = createClient();
   const { data, error }: PostgrestResponse<ProfileDetailsType> = await supabase
     .from("profile")
-    .select(`email, first_name, last_name, image_url`);
+    .select(`profile_id, email, first_name, last_name, image_url`);
   if (error) {
     console.error("Error fetching profile details:", error);
     return undefined;
   }
+
   if (data && data.length > 0) return data[0];
 }
 
@@ -52,8 +54,6 @@ export async function linkListActions(
       .from("link")
       .delete()
       .in("link_id", linksToDeleteArray);
-
-    console.log({ response });
   }
 
   // insert and/or upsert
@@ -86,7 +86,7 @@ export async function linkListActions(
       .from("link")
       .insert(linkToInsertArray)
       .select();
-    console.log({ res });
+
     if (!error) {
       res?.forEach((link) => {
         linkResponseArray.push({
@@ -104,7 +104,7 @@ export async function linkListActions(
       .from("link")
       .upsert(linkToUpsertArray)
       .select();
-    console.log({ resUpsert });
+
     if (!error) {
       resUpsert?.forEach((link) => {
         linkResponseArray.push({
@@ -118,4 +118,17 @@ export async function linkListActions(
   }
 
   return linkResponseArray;
+}
+
+export async function updateProfileAction(userDetails: ProfileSchemaType) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("profile")
+    .update({
+      first_name: userDetails?.firstName,
+      last_name: userDetails?.lastName,
+      email: userDetails?.email,
+    })
+    .eq("profile_id", userDetails?.profile_id)
+    .select();
 }

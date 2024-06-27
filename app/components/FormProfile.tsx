@@ -1,38 +1,59 @@
 "use client";
-import React from "react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+
+import { useForm } from "react-hook-form";
 import ProfileInput from "./formProfiles/ProfileInput";
 import ProfileImage from "./formProfiles/ProfileImage";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ProfileDetailsType,
+  ProfileSchemaType,
+} from "../protected/protectedFileTypes";
+import { updateProfileAction } from "@/utils/supabase/db_actions";
 
 export const profileSchema = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
   email: z.string().email(),
+  profile_id: z.string(),
 });
 
-const FormProfile = () => {
+const FormProfile = ({
+  profileDetails,
+}: {
+  profileDetails: ProfileDetailsType;
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<z.infer<typeof profileSchema>>({
+    defaultValues: {
+      firstName: profileDetails?.first_name,
+      lastName: profileDetails?.last_name,
+      email: profileDetails?.email,
+      profile_id: profileDetails?.profile_id,
+    },
     resolver: zodResolver(profileSchema),
   });
 
-  function onSubmit(data: z.infer<typeof profileSchema>) {
-    console.log({ errors });
-    console.log({ data });
+  function onSubmit(data: ProfileSchemaType) {
+    updateProfileAction(data);
   }
 
   return (
     <div>
-      <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className=" space-y-6 grid grid-rows-[auto_1fr]">
-          <ProfileImage />
+      <div className=" space-y-6 grid grid-rows-[auto_1fr]">
+        <ProfileImage profileImageURl={profileDetails?.image_url as string} />
+        <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
           <div className=" bg-main-grey-light rounded-lg p-5 space-y-4">
+            <input
+              type="hidden"
+              {...register("profile_id", {
+                required: "Can't be emtpy",
+              })}
+            />
             <ProfileInput
               label="First name*"
               htmlFor="firstName"
@@ -55,8 +76,8 @@ const FormProfile = () => {
               errorMessage={errors["email"]?.message?.toString()}
             />
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

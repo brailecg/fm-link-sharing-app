@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 
 import LsaFileSvg from "../formLinks/icons/LsaFileSvg";
-import { uploadImageAvatar } from "@/utils/supabase/actions";
+import { uploadImageAvatar } from "@/utils/supabase/db_actions_clientsb";
 
-const ProfileImage = () => {
-  const [imgUploadLocalUrl, setImgUploadLocalUrl] = useState("");
+const ProfileImage = ({ profileImageURl }: { profileImageURl: string }) => {
+  const profileImage = profileImageURl === null ? "" : profileImageURl;
+  const [imgUploadLocalUrl, setImgUploadLocalUrl] = useState(profileImage);
 
   const loadFile = (event?: React.ChangeEvent<HTMLInputElement>) => {
     if (
@@ -15,9 +16,10 @@ const ProfileImage = () => {
       event.target.files.length > 0
     ) {
       setImgUploadLocalUrl(URL.createObjectURL(event.target.files[0]));
-      // uploadImageAvatar(event.target.files[0]);
+      uploadImageAvatar(event.target.files[0]);
     }
   };
+
   return (
     <div className="grid space-y-2 sm:space-y-0 sm:grid-cols-3 p-5 bg-main-grey-light rounded-lg">
       <span className=" text-main-grey place-self-start my-auto">
