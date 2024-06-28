@@ -110,8 +110,8 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
 
   return (
     <div
-      className={`space-y-6  ${
-        fields.length === 0 ? "grid grid-rows-[auto_1fr]" : ""
+      className={` ${
+        fields.length === 0 ? "grid grid-rows-[auto_1fr]" : "space-y-6 "
       } `}>
       <button
         onClick={handleSetLinks}
@@ -119,49 +119,52 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
         + Add new link
       </button>
       <form className="" id="link-form" onSubmit={handleSubmit(onSubmit)}>
-        {fields.length > 0 &&
-          fields?.map((field, index) => {
-            return (
-              <div
-                key={field?.id}
-                className=" bg-main-grey-light p-4 rounded-lg space-y-3 mb-4">
-                <div className="flex justify-between">
-                  <p className=" text-main-grey font-semibold">
-                    = Link {index + 1}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => removeLink(index, field?.link_id || "")}
-                    className=" text-main-grey">
-                    Remove
-                  </button>
+        {fields.length > 0 && (
+          <div className=" max-h-[330px] overflow-y-auto">
+            {fields?.map((field, index) => {
+              return (
+                <div
+                  key={field?.id}
+                  className=" bg-main-grey-light p-4 rounded-lg space-y-3 mb-4">
+                  <div className="flex justify-between">
+                    <p className=" text-main-grey font-semibold">
+                      = Link {index + 1}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => removeLink(index, field?.link_id || "")}
+                      className=" text-main-grey">
+                      Remove
+                    </button>
+                  </div>
+                  <div>
+                    <SelectPlatform control={control} index={index} />
+                  </div>
+                  <div>
+                    <LinkInput
+                      index={index}
+                      name={`links.${index}.linkString`}
+                      label="Link"
+                      type="string"
+                      register={register}
+                      errorMessage={errors?.links?.[
+                        index
+                      ]?.linkString?.message?.toString()}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <SelectPlatform control={control} index={index} />
-                </div>
-                <div>
-                  <LinkInput
-                    index={index}
-                    name={`links.${index}.linkString`}
-                    label="Link"
-                    type="string"
-                    register={register}
-                    errorMessage={errors?.links?.[
-                      index
-                    ]?.linkString?.message?.toString()}
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        )}
       </form>
       {fields.length === 0 && (
-        <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-10 p-4 sm:p-0">
+        <div className=" flex flex-col justify-center items-center  bg-main-grey-light rounded-lg space-y-6 sm:space-y-6 p-4">
           <Image src={getStarted} alt="get-started" />
-          <h3 className="font-bold text-2xl text-main-grey-dark">
+          <h3 className="font-bold text-xl text-main-grey-dark">
             Let's get you started
           </h3>
-          <p className=" text-main-grey max-w-[488px] text-center">
+          <p className=" text-main-grey max-w-[488px] text-center text-sm">
             Use the “Add new link” button to get started. Once you have more
             than one link, you can reorder and edit them. We're here to help you
             share your profiles with everyone!

@@ -28,7 +28,7 @@ const PhoneLinksData = ({
 }) => {
   const linkDataArrayLocal = linkData;
   return (
-    <div className=" grid place-items-center grid-cols-1  overflow-y-auto custom-scroll h-80">
+    <div className=" grid place-items-center grid-cols-1 gap-y-4  overflow-y-auto  h-80">
       {linkDataArrayLocal?.map((link) => {
         const bgColor = `${linkIcons[link?.website][1]}`;
         return (
