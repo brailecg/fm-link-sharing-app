@@ -76,7 +76,7 @@ const FormLogin = ({ message }: { message: string }) => {
               height={24}
               alt="Google Icon"
               src={
-                "https://fdksslojrpadbebswbsg.supabase.co/storage/v1/object/public/icons/icon-google.png?t=2024-05-28T02%3A26%3A18.354Z"
+                "https://enhjxvyhuuhtaizjffuz.supabase.co/storage/v1/object/public/icons/icon-google.png?t=2024-06-28T05%3A49%3A24.830Z"
               }
             />
             <span className=" text-black/50 font-semibold">
@@ -93,7 +93,7 @@ const FormLogin = ({ message }: { message: string }) => {
               height={24}
               alt="Supabase Icon"
               src={
-                "https://fdksslojrpadbebswbsg.supabase.co/storage/v1/object/public/icons/supabase-logo-icon.png?t=2024-06-01T03%3A18%3A03.958Z"
+                "https://enhjxvyhuuhtaizjffuz.supabase.co/storage/v1/object/public/icons/supabase-logo-icon.png?t=2024-06-28T05%3A49%3A38.008Z"
               }
             />
             <span className=" text-black/50 font-semibold">

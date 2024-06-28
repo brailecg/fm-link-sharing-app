@@ -11,7 +11,7 @@ const Signup = async ({
   return (
     <div className="flex justify-center items-center  bg-main-grey-light w-dvw h-dvh p-8 sm:p-0">
       <div className="w-full h-full flex flex-col sm:w-[476px] sm:h-[573px]">
-        <AppLogo className=" sm:self-center mb-16" />
+        <AppLogo className=" sm:self-center mb-8" />
         <div className="animate-in sm:p-10 sm:bg-white">
           <div className=" mb-10">
             <h1 className=" text-2xl font-bold text-main-grey-dark leading-[150%]">
