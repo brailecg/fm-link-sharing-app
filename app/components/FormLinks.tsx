@@ -16,7 +16,8 @@ import {
   FormSchema,
 } from "../protected/protectedFileTypes";
 import { linkListActions } from "@/utils/supabase/db_actions";
-import { useLinkDataStore } from "../store";
+import { useIsLoadingStore, useLinkDataStore } from "../store";
+import Loader from "./Loader";
 
 export const linkIconObj: {
   [key: string]: JSX.Element;
@@ -28,12 +29,15 @@ export const linkIconObj: {
 };
 
 const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const setIsLoadingState = useIsLoadingStore((state) => state.updateIsLoading);
   const updateDataLinks = useLinkDataStore(
     (state) => state.updateLinkDataArray
   );
 
   useEffect(() => {
     updateDataLinks(linkData);
+    setIsLoadingState(false);
   }, []);
 
   const [linksToDeleteArray, setLinksToDeleteArray] = useState<string[]>([]);
@@ -75,7 +79,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
         id: "github",
         name: "Github",
       },
-      linkString: "https://google.com",
+      linkString: "",
     });
   };
 
@@ -87,6 +91,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
   };
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setBtnDisabled(true);
     const linkDataRes: LinkDataType[] = await linkListActions(
       data,
       linksToDeleteArray
@@ -105,6 +110,7 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
     });
 
     setValue("links", newFieldValues);
+    setBtnDisabled(false);
     // updateDataLinks(linkDataRes);
   }
 
@@ -113,6 +119,12 @@ const FormLinks = ({ linkData }: { linkData: LinkDataType[] | undefined }) => {
       className={` ${
         fields.length === 0 ? "grid grid-rows-[auto_1fr]" : "space-y-6 "
       } `}>
+      {btnDisabled && (
+        <>
+          <div className="absolute z-20 top-0 bottom-0 left-0 right-0 bg-white opacity-50 pointer-events-none"></div>
+          <Loader />
+        </>
+      )}
       <button
         onClick={handleSetLinks}
         className="border border-main-purple rounded-lg w-full text-main-purple text-sm font-semibold h-11 hover:bg-main-purple-light">

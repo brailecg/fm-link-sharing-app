@@ -11,6 +11,8 @@ import {
   ProfileSchemaType,
 } from "../protected/protectedFileTypes";
 import { updateProfileAction } from "@/utils/supabase/db_actions";
+import { useIsLoadingStore } from "../store";
+import { useEffect, useState } from "react";
 
 export const profileSchema = z.object({
   firstName: z.string().min(1),
@@ -24,6 +26,9 @@ const FormProfile = ({
 }: {
   profileDetails: ProfileDetailsType;
 }) => {
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const setIsLoadingState = useIsLoadingStore((state) => state.updateIsLoading);
+
   const {
     register,
     handleSubmit,
@@ -38,9 +43,15 @@ const FormProfile = ({
     resolver: zodResolver(profileSchema),
   });
 
-  function onSubmit(data: ProfileSchemaType) {
-    updateProfileAction(data);
+  async function onSubmit(data: ProfileSchemaType) {
+    setBtnDisabled(true);
+    await updateProfileAction(data);
+    setBtnDisabled(false);
   }
+
+  useEffect(() => {
+    setIsLoadingState(false);
+  }, []);
 
   return (
     <div>

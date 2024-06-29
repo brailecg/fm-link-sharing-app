@@ -17,3 +17,18 @@ export const useLinkDataStore = create<LinkDataState & LinkDataAction>(
       set(() => ({ linkDataArray: linkDataArray })),
   })
 );
+
+type IsLoadingState = {
+  isLoading: boolean;
+};
+
+type IsLoadingAction = {
+  updateIsLoading: (isLoading: IsLoadingState["isLoading"]) => void;
+};
+
+export const useIsLoadingStore = create<IsLoadingState & IsLoadingAction>(
+  (set) => ({
+    isLoading: false,
+    updateIsLoading: (isLoading) => set(() => ({ isLoading: isLoading })),
+  })
+);

@@ -7,6 +7,7 @@ export async function uploadImageAvatar(avatarFile: File) {
   } = await supabase.auth.getUser();
 
   const fileName = `${user?.id}`;
+  console.log({ fileName });
 
   const { data, error } = await supabase.storage
     .from("avatars")
@@ -25,5 +26,7 @@ export async function uploadImageAvatar(avatarFile: File) {
       .update({ image_url: `${data?.publicUrl}?d=${Date.now()}` })
       .eq("profile_id", user?.id)
       .select();
+  } else {
+    console.log({ error });
   }
 }

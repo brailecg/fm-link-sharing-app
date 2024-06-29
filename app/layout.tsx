@@ -23,8 +23,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={instrument_sans.variable}>
-      <body className="bg-main-grey-light font-main-sans h-dvh">
-        <main className="h-full w-full">{children}</main>
+      <body className=" bg-main-grey-light font-main-sans h-dvh">
+        <main className="relative h-full w-full">{children}</main>
       </body>
     </html>
   );

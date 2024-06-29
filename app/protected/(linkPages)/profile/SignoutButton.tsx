@@ -17,8 +17,15 @@ const SignoutButton = () => {
     }
   };
   return (
-    <div className="relative">
-      {isSigningOut ? <Loader /> : ""}
+    <div className="s">
+      {isSigningOut ? (
+        <>
+          <div className="absolute z-20 top-0 bottom-0 left-0 right-0 bg-white opacity-50 pointer-events-none"></div>
+          <Loader />
+        </>
+      ) : (
+        ""
+      )}
       <button
         onClick={handleSignout}
         className={` ${

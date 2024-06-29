@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { LinkDataType, ProfileDetailsType } from "../protectedFileTypes";
 import { getProfileDetails, getAllLinks } from "@/utils/supabase/db_actions";
 import PreviewButton from "./PreviewButton";
+import BackToEditor from "./BackToEditor";
 
 const page = async () => {
   const supabase = createClient();
@@ -26,11 +27,7 @@ const page = async () => {
     <div className="w-full relative">
       <div className=" sm:p-6 sm:bg-main-purple sm:h-[40vh] rounded-b-3xl -z-10">
         <div className="flex justify-between rounded-lg bg-main-grey-light px-6 py-4">
-          <Link
-            href={"/protected/profile"}
-            className={`min-[370px]:w-40 hover:bg-main-purple-light flex items-center justify-center px-4 py-3 border border-main-purple rounded-lg group font-semibold text-main-purple`}>
-            Back to Editor
-          </Link>
+          <BackToEditor />
           <PreviewButton userId={user?.id} />
         </div>
       </div>
