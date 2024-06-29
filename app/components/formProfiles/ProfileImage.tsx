@@ -4,8 +4,14 @@ import React, { useState } from "react";
 import LsaFileSvg from "../formLinks/icons/LsaFileSvg";
 import { uploadImageAvatar } from "@/utils/supabase/db_actions_clientsb";
 import Loader from "../Loader";
+import { useProfileDetails } from "@/app/store";
 
 const ProfileImage = ({ profileImageURl }: { profileImageURl: string }) => {
+  const userDetails = useProfileDetails((state) => state.profileDetailsState);
+
+  const setUserDetails = useProfileDetails(
+    (state) => state.updateProfileDetailsArray
+  );
   const [btnDisabled, setBtnDisabled] = useState(false);
   const profileImage = profileImageURl === null ? "" : profileImageURl;
   const [imgUploadLocalUrl, setImgUploadLocalUrl] = useState(profileImage);
@@ -19,8 +25,14 @@ const ProfileImage = ({ profileImageURl }: { profileImageURl: string }) => {
       event.target.files.length > 0
     ) {
       setImgUploadLocalUrl(URL.createObjectURL(event.target.files[0]));
-      await uploadImageAvatar(event.target.files[0]);
+      const newUrl = await uploadImageAvatar(event.target.files[0]);
+
+      setUserDetails({
+        ...userDetails,
+        image_url: newUrl,
+      });
     }
+
     setBtnDisabled(false);
   };
 

@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import SignUpInput from "./form/SignUpInput";
 
 import { signUp } from "@/utils/supabase/sb_auth";
+import Loader from "./Loader";
 
 const FormSignup = ({ message }: { message: string }) => {
+  const [btnDisabled, setBtnDisabled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -13,11 +15,19 @@ const FormSignup = ({ message }: { message: string }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-    signUp(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
+    setBtnDisabled(true);
+    await signUp(data);
+    setBtnDisabled(false);
   };
   return (
     <>
+      {btnDisabled && (
+        <>
+          <div className="absolute z-20 top-0 bottom-0 left-0 right-0 bg-white opacity-50 pointer-events-none"></div>
+          <Loader />
+        </>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <SignUpInput
           register={register}

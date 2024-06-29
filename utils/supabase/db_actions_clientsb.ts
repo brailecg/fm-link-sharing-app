@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { createClient } from "./client";
 
 export async function uploadImageAvatar(avatarFile: File) {
@@ -7,7 +8,6 @@ export async function uploadImageAvatar(avatarFile: File) {
   } = await supabase.auth.getUser();
 
   const fileName = `${user?.id}`;
-  console.log({ fileName });
 
   const { data, error } = await supabase.storage
     .from("avatars")
@@ -20,13 +20,16 @@ export async function uploadImageAvatar(avatarFile: File) {
   if (!error) {
     // update profile table with image url
     const { data } = supabase.storage.from("avatars").getPublicUrl(fileName);
-
+    const newUrl = `${data?.publicUrl}?d=${Date.now()}`;
     const { data: profile, error } = await supabase
       .from("profile")
-      .update({ image_url: `${data?.publicUrl}?d=${Date.now()}` })
+      .update({ image_url: newUrl })
       .eq("profile_id", user?.id)
       .select();
-  } else {
-    console.log({ error });
+
+    if (!error) {
+      return newUrl;
+    }
   }
+  revalidatePath("/protected/(linkPages)/profile/page");
 }

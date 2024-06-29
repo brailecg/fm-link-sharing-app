@@ -22,8 +22,10 @@ export default async function Profile() {
   if (!user) {
     return redirect("/login");
   }
+
   const profileDetails: ProfileDetailsType = await getProfileDetails(user?.id);
   const linkData: LinkDataType[] | undefined = await getAllLinks(user?.id);
+
   return (
     <div className=" p-4 sm:p-0 grid grid-rows-1 grid-cols-5 lg:space-x-6 sm:mt-6 ">
       <div

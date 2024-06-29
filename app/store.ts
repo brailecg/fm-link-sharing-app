@@ -1,6 +1,9 @@
 import { create } from "zustand";
 
-import { LinkDataType } from "./protected/protectedFileTypes";
+import {
+  LinkDataType,
+  ProfileDetailsType,
+} from "./protected/protectedFileTypes";
 
 type LinkDataState = {
   linkDataArray: LinkDataType[] | undefined;
@@ -32,3 +35,21 @@ export const useIsLoadingStore = create<IsLoadingState & IsLoadingAction>(
     updateIsLoading: (isLoading) => set(() => ({ isLoading: isLoading })),
   })
 );
+
+type ProfileDetailsState = {
+  profileDetailsState: ProfileDetailsType | undefined;
+};
+
+type ProfileDetailsAction = {
+  updateProfileDetailsArray: (
+    profileDetailsState: ProfileDetailsState["profileDetailsState"]
+  ) => void;
+};
+
+export const useProfileDetails = create<
+  ProfileDetailsState & ProfileDetailsAction
+>((set) => ({
+  profileDetailsState: undefined,
+  updateProfileDetailsArray: (profileDetailsState) =>
+    set(() => ({ profileDetailsState: profileDetailsState })),
+}));

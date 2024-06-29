@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 const profileDetails = z.object({
-  profile_id: z.string(),
-  email: z.string().email(),
-  first_name: z.string(),
-  last_name: z.string(),
-  image_url: z.string(),
+  profile_id: z.string().optional(),
+  email: z.string().email().optional(),
+  first_name: z.string().optional(),
+  last_name: z.string().optional(),
+  image_url: z.string().optional(),
 });
 
 export type ProfileDetailsType = z.infer<typeof profileDetails> | undefined;

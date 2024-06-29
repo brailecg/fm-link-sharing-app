@@ -128,7 +128,10 @@ export async function linkListActions(
   return linkResponseArray;
 }
 
-export async function updateProfileAction(userDetails: ProfileSchemaType) {
+export async function updateProfileAction(
+  userDetails: ProfileSchemaType
+): Promise<ProfileDetailsType> {
+  let resp;
   const supabase = createClient();
   const { data, error } = await supabase
     .from("profile")
@@ -139,4 +142,13 @@ export async function updateProfileAction(userDetails: ProfileSchemaType) {
     })
     .eq("profile_id", userDetails?.profile_id)
     .select();
+  if (!error) {
+    const updatedResponse = {
+      data: data.map(({ created_at, display_name, ...rest }) => rest),
+    };
+
+    resp = updatedResponse?.data[0];
+  }
+  revalidatePath("/protected/(linkPages)/profile/page");
+  return resp;
 }

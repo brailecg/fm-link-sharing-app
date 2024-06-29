@@ -6,40 +6,19 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { ProfileDetailsType } from "../protected/protectedFileTypes";
 
+import { useProfileDetails } from "../store";
+import { updateProfileAction } from "@/utils/supabase/db_actions";
+
 const PhoneLinksUserDetails = ({
   profileDetails,
 }: {
   profileDetails: ProfileDetailsType;
 }) => {
-  const [userDetails, setUserDetails] = useState(profileDetails);
-
   const supabase = createClient();
-  useEffect(() => {
-    const channel = supabase
-      .channel("schema-db-changes")
-      .on(
-        "postgres_changes",
-        {
-          event: "UPDATE",
-          schema: "public",
-          table: "profile",
-        },
-        (payload) => {
-          setUserDetails({
-            profile_id: payload.new.profile_id,
-            image_url: payload.new.image_url,
-            first_name: payload.new.first_name,
-            last_name: payload.new.last_name,
-            email: payload.new.email,
-          });
-        }
-      )
-      .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, [supabase]);
+  // const [userDetails, setUserDetails] = useState(profileDetails);
+
+  const userDetails = useProfileDetails((state) => state.profileDetailsState);
 
   return (
     <div className=" grid place-items-center gap-4 grid-cols-1">

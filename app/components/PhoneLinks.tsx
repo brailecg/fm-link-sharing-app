@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 import phoneImage from "../../public/assets/preview-section.png";
@@ -11,6 +12,8 @@ import PhoneLinksData from "./PhoneLinksData";
 import PhoneLinksUserDetails from "./PhoneLinksUserDetails";
 
 import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./formLinks/icons";
+import { useProfileDetails } from "../store";
+import { useEffect } from "react";
 
 export const linkIcons: LinkIconsType = {
   github: [<LsaGhSvg fill="white" />, "#1A1A1A"],
@@ -28,6 +31,16 @@ const PhoneLinks = ({
   linkData: LinkDataType[] | undefined;
   from?: string;
 }) => {
+  const userDetails = useProfileDetails((state) => state.profileDetailsState);
+
+  const setUserDetails = useProfileDetails(
+    (state) => state.updateProfileDetailsArray
+  );
+
+  useEffect(() => {
+    setUserDetails(userDetails !== undefined ? userDetails : profileDetails);
+  }, []);
+
   return (
     <div
       className={`relative w-[308px] h-[600px] ${
