@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import SignUpInput from "./form/SignUpInput";
-
 import { signUp } from "@/utils/supabase/sb_auth";
 import Loader from "./Loader";
 

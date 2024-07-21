@@ -1,5 +1,3 @@
-import React from "react";
-
 const placeHolderVariant = {
   imageHolder: "w-24 text h-24 rounded-full",
   nameHolder: "w-[160px] h-4 rounded-full",

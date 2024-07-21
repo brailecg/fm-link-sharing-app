@@ -1,5 +1,4 @@
 import React from "react";
-import SelectPlatform from "./SelectPlatform";
 
 const RepeaterLinks = ({ removeLink }: any) => {
   return (

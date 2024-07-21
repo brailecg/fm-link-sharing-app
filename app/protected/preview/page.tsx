@@ -1,8 +1,5 @@
 import React from "react";
-import Link from "next/link";
-
 import PhoneLinks from "@/app/components/PhoneLinks";
-
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { LinkDataType, ProfileDetailsType } from "../protectedFileTypes";

@@ -4,8 +4,6 @@ import {
   ProfileDetailsType,
 } from "@/app/protected/protectedFileTypes";
 import { getProfileDetails, getAllLinks } from "@/utils/supabase/db_actions";
-import Link from "next/link";
-import React from "react";
 
 const Preview = async ({ params }: { params: { id: string } }) => {
   const profileDetails: ProfileDetailsType = await getProfileDetails(params.id);

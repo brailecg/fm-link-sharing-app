@@ -7,10 +7,8 @@ import ProfileIcon from "./svg/ProfileIcon";
 import PreviewIcon from "./svg/PreviewIcon";
 import lsaIcon from "../../public/assets/lsa-icon.png";
 import lsaLogo from "../../public/assets/lsa-logo.png";
-
 import Loader from "./Loader";
 import { useIsLoadingStore } from "../store";
-import { useEffect } from "react";
 
 const Nav = () => {
   const isLoadingState = useIsLoadingStore((state) => state.isLoading);

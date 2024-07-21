@@ -1,10 +1,8 @@
 "use client";
-import React, { SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import { LsaLinkSvg } from "../components/formLinks/icons";
 import Placeholder from "../components/phone/Placeholder";
 import { LinkDataType, LinkIconsType } from "../protected/protectedFileTypes";
-import { useLinkDataStore } from "../store";
 
 const LINK_PLACEHOLDER_COUNT: number = 5;
 

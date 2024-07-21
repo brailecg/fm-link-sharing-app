@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
-
 import phoneImage from "../../public/assets/preview-section.png";
-
 import {
   LinkDataType,
   LinkIconsType,
@@ -10,7 +8,6 @@ import {
 } from "../protected/protectedFileTypes";
 import PhoneLinksData from "./PhoneLinksData";
 import PhoneLinksUserDetails from "./PhoneLinksUserDetails";
-
 import { LsaFbSvg, LsaGhSvg, LsaLiSvg, LsaYtSvg } from "./formLinks/icons";
 import { useProfileDetails } from "../store";
 import { useEffect } from "react";

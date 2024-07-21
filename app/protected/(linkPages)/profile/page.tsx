@@ -1,16 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-
 import { z } from "zod";
-
 import PhoneLinks from "../../../components/PhoneLinks";
 import FormProfile from "@/app/components/FormProfile";
-
 import SignoutButton from "./SignoutButton";
 import { LinkDataType, ProfileDetailsType } from "../../protectedFileTypes";
 import { getProfileDetails, getAllLinks } from "@/utils/supabase/db_actions";
-
-const profileSchema = z.object({});
 
 export default async function Profile() {
   const supabase = createClient();

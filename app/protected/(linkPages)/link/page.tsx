@@ -1,10 +1,7 @@
 import { createClient } from "../../../../utils/supabase/server";
 import { redirect } from "next/navigation";
-
 import FormLinks from "../../../components/FormLinks";
-
 import PhoneLinks from "../../../components/PhoneLinks";
-
 import { getAllLinks, getProfileDetails } from "@/utils/supabase/db_actions";
 import { LinkDataType, ProfileDetailsType } from "../../protectedFileTypes";
 

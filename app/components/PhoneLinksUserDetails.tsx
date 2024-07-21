@@ -3,11 +3,8 @@ import React from "react";
 import Placeholder from "../components/phone/Placeholder";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
 import { ProfileDetailsType } from "../protected/protectedFileTypes";
-
 import { useProfileDetails } from "../store";
-import { updateProfileAction } from "@/utils/supabase/db_actions";
 
 const PhoneLinksUserDetails = ({
   profileDetails,

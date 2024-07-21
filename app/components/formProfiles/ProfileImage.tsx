@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-
 import LsaFileSvg from "../formLinks/icons/LsaFileSvg";
 import { uploadImageAvatar } from "@/utils/supabase/db_actions_clientsb";
 import Loader from "../Loader";

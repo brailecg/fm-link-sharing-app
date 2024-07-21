@@ -9,8 +9,8 @@ import {
   continueAnonymously,
   continueWithGoogle,
 } from "@/utils/supabase/sb_auth";
-
 import Loader from "./Loader";
+
 const FormLogin = ({ message }: { message: string }) => {
   const [btnDisabled, setBtnDisabled] = useState(false);
   const {

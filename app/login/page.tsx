@@ -2,7 +2,7 @@
 import { createClient } from "../../utils/supabase/server";
 import { redirect } from "next/navigation";
 import React from "react";
-import AppLogo from "@/components/AppLogo";
+import AppLogo from "../components/AppLogo";
 import FormLogin from "../components/FormLogin";
 
 export default async function Login({
