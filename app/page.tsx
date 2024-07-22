@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-// TODO: create webpage of the app
+// TODO: create landing page for the app
 export default async function Index() {
   redirect("/login");
 }
