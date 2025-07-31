@@ -89,9 +89,7 @@ const FormLogin = ({ message }: { message: string }) => {
             width={24}
             height={24}
             alt="Google Icon"
-            src={
-              "https://enhjxvyhuuhtaizjffuz.supabase.co/storage/v1/object/public/icons/icon-google.png?t=2024-06-28T05%3A49%3A24.830Z"
-            }
+            src={"assets/supabase-logo-icon.png"}
           />
           <span className=" text-black/50 font-semibold">
             Continue With Google
@@ -105,9 +103,7 @@ const FormLogin = ({ message }: { message: string }) => {
             width={24}
             height={24}
             alt="Supabase Icon"
-            src={
-              "https://enhjxvyhuuhtaizjffuz.supabase.co/storage/v1/object/public/icons/supabase-logo-icon.png?t=2024-06-28T05%3A49%3A38.008Z"
-            }
+            src={"assets/supabase-logo-icon.png"}
           />
           <span className=" text-black/50 font-semibold">
             Continue Anonymously
@@ -115,6 +111,10 @@ const FormLogin = ({ message }: { message: string }) => {
         </button>
         <div className=" italic text-xs mt-1 text-main-grey-hover text-center">
           Anonynous users will be deleted at the end of each day.
+        </div>
+        <div className=" italic text-red-500 text-xs mt-1 text-main-grey-hover text-center">
+          <p>(Supabase backend service has expired.</p>
+          <p>Subscribe again for full database access)</p>
         </div>
       </div>
     </>
