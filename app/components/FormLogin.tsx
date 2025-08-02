@@ -112,10 +112,6 @@ const FormLogin = ({ message }: { message: string }) => {
         <div className=" italic text-xs mt-1 text-main-grey-hover text-center">
           Anonynous users will be deleted at the end of each day.
         </div>
-        <div className=" italic text-red-500 text-xs mt-1 text-main-grey-hover text-center">
-          <p>(Supabase backend service has expired.</p>
-          <p>Subscribe again for full database access)</p>
-        </div>
       </div>
     </>
   );
