@@ -89,7 +89,7 @@ const FormLogin = ({ message }: { message: string }) => {
             width={24}
             height={24}
             alt="Google Icon"
-            src={"assets/supabase-logo-icon.png"}
+            src={"assets/google.png"}
           />
           <span className=" text-black/50 font-semibold">
             Continue With Google
